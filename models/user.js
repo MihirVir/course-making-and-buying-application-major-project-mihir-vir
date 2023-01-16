@@ -16,6 +16,9 @@ const UserSchema = new mongoose.Schema({
     },
     isAdmin: {
         type: Boolean,
+    },
+    avatar: {
+        type: String
     }
 }, {
     timestamps: true

@@ -9,10 +9,10 @@ const CourseSchema = new mongoose.Schema({
         ref: "User"
     },
     video: {
-        type: String
+        type: [String]
     },
-    videoOriginalName: {
-        type: String
+    videoName: {
+        type: [String]
     },
     template: {
         type: String
