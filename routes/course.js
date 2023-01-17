@@ -13,6 +13,6 @@ router.delete('/', removeAllCourses);
 // update course
 router.patch('/video/:id', deleteSpecificVideo);
 router.patch('/:id', uploadImage.single('img'), updateCourse)
-
+// router.patch('/title/:id', changeTitle);
 
 module.exports = router;

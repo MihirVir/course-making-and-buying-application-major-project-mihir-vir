@@ -16,6 +16,11 @@ const CourseSchema = new mongoose.Schema({
     },
     template: {
         type: String
+    },
+    // if false we don't send it to the user
+    privacy: {
+        type: Boolean,
+        default: false
     }
 }, { timestamps: true })
 
