@@ -8,6 +8,10 @@ const CourseSchema = new mongoose.Schema({
         type: mongoose.Types.ObjectId,
         ref: "User"
     },
+    courseName: {
+        type: String,
+        required: true
+    },
     video: {
         type: [String]
     },
@@ -16,6 +20,9 @@ const CourseSchema = new mongoose.Schema({
     },
     template: {
         type: String
+    },
+    tags: {
+        type: [String]
     },
     // if false we don't send it to the user
     privacy: {

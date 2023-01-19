@@ -12,7 +12,12 @@ const uploadVideo = async (req, res) => {
         let titleArr = title.replace(/\s/g,"").split(',')
         let titleArrSize = titleArr.length
         const lengthOfFiles = arr.length;
-       
+        const tags = req.body.tags;
+        let tagsArr = tags.split(',')
+        let newTags = []
+        tagsArr.forEach(tag => {
+            newTags = tag.trim(" ");
+        })
         if (titleArrSize !== lengthOfFiles) {
             return res
                     .status(404)
@@ -25,8 +30,10 @@ const uploadVideo = async (req, res) => {
         const newCourse = new Course({
                 title: titleArr,
                 video: arr,
+                tags: newTags,
                 author: req.user.id,
-                videoName: videoNameArr
+                videoName: videoNameArr,
+                courseName: req.body.name
         });
 
         const savedCourse = await newCourse.save();
@@ -246,42 +253,47 @@ const updateCourse = async (req, res) => {
     }
 }
 
-// const changeTitle = async (req, res) => {
-//     try {
-//         let arr = []
+const getVideoByTags = async (req, res) => {
+    try {
+        const tags = req.query.tags.split(',');
         
-//         const courseId = req.params.id;
-//         const changedTitle = req.body.title;
-//         const findCourseTitle = await Course.findById(courseId);
+        console.log(tags);
 
-//         let titleArr = changedTitle.replace(/\s/g,"").split(',')
-        
-//         const courseFile = findCourseTitle.title;
+        const videosResult = await Course.find({tags: {$in: tags} }).limit(5);
 
-//         if (courseFile.length !== titleArr.length) {
-//             return res
-//                     .status(404)
-//                     .json({
-//                         responseStatus: 404,
-//                         message: "Invalid Size Of The Array"
-//                     })
-//         }
+        return res
+                .status(200)
+                .json(videosResult)
+    } catch (err) {
+        return res
+                .status(500)
+                .json({
+                    responseStatus: 500,
+                    message: "Internal Server Error"
+                })
+    }
+}
 
-//         const updatingTitle = await Course.findById(courseId, {title: arr}, {new: true});
+const searchVideoUsingRegEx = async (req, res) => {
+    try {
+        const query = req.query.q;
 
-//         return res  
-//                 .status(200)
-//                 .json(updatingTitle)
-        
-//     } catch (err) {
-//         return res
-//                 .status(500)
-//                 .json({
-//                     responseStatus: 500,
-//                     message: "Internal Server Error"
-//                 })
-//     }
-// }
+        const findCourse = await Course.find({courseName: { $regex: query, $options: "i"}}).limit(5);
+
+        return res
+                .status(200)
+                .json(findCourse)
+    } catch (err) {
+        console.log(err);
+        return res
+                .status(500)
+                .json({
+                    responseStatus: 500,
+                    message: "Internal Server Error"
+                })
+    }
+}
+
 module.exports = {
     uploadVideo,
     removeAllCourses,
@@ -290,5 +302,6 @@ module.exports = {
     getAllCourses,
     deleteSpecificVideo,
     updateCourse,
-    
+    getVideoByTags,
+    searchVideoUsingRegEx
 }

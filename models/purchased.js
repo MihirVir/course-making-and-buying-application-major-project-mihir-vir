@@ -5,10 +5,10 @@ const PurchasedSchema = new mongoose.Schema({
         type: mongoose.Types.ObjectId,
         ref: "User"
     },
-    coursesPurchased: [{
+    coursesPurchased: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Course"
-    }]
+    }
 }, {
     timestamps: true
 })

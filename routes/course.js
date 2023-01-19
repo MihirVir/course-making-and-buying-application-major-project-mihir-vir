@@ -1,9 +1,13 @@
 const express = require('express')
 const router = express.Router();
-const {uploadVideo, removeAllCourses, deleteSpecificVideo, updateCourse} = require('../controllers/video_controller');
+const {uploadVideo, removeAllCourses, deleteSpecificVideo, updateCourse, getVideoByTags, searchVideoUsingRegEx} = require('../controllers/video_controller');
 const upload = require('../middlewares/multer_config')
 const {verifyIsAdmin, verifyUser} = require('../middlewares/verifyToken');
 const uploadImage = require('../middlewares/multer_templates_config')
+
+// get routes
+router.get('/tags', getVideoByTags)
+router.get('/search', searchVideoUsingRegEx)
 // post routes
 router.post('/upload', verifyUser, upload.array('files'), uploadVideo);
 
