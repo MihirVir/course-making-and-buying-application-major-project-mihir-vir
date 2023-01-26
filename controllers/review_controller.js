@@ -1,10 +1,29 @@
 const Review = require('../models/review');
-
+const Purchased = require('../models/purchased');
 const createReview = async (req, res) =>{
     try {
-        const courseId = req.params.courseId;
+        const courseId = req.params.id;
         const userId = req.user.id
         
+        // finding if the user had already reviewed the course and if even bought that course
+
+        const findingReview = Review.findOne({reviewUser: userId})
+        if (findingReview) {
+            return res  
+                    .status(400)
+                    .jsoon({
+                        message: "Already reviewed the course can't do it again"
+                    })
+        }
+
+        const findingPurchased = Purchased.findOne({customer: userId, coursesPurchased: courseId})
+        if (!findingPurchased) {
+            return res
+                    .status(400)
+                    .json({
+                        message: "Please purchase the course to review it"
+                    })
+        }
         const newReview = new Review({
             reviewUser: userId,
             courseReview: courseId,
@@ -18,6 +37,7 @@ const createReview = async (req, res) =>{
                 .json(savedReview)
         
     } catch (err) {
+        console.log(err);
         return res
                 .status(500)
                 .json({
@@ -29,7 +49,7 @@ const createReview = async (req, res) =>{
 
 const updateReview = async (req, res) => {
     try {
-        const reviewId = req.params.reviewId;
+        const reviewId = req.params.id;
         const userId = req.user.id;
         const changeRating = req.body.rating;
         const findingReview = await Review.findById(reviewId);
@@ -64,7 +84,7 @@ const updateReview = async (req, res) => {
 
 const deleteReview = async (req, res) => {
     try {
-        const reviewId = req.params.reviewId;
+        const reviewId = req.params.id;
 
         const deletingReview = await Review.findByIdAndDelete(reviewId);
 
@@ -111,7 +131,7 @@ const getReviews = async (req, res) => {
 
 const getReview = async (req, res) => {
     try {
-        const reviewId = req.params.reviewId;
+        const reviewId = req.params.id;
 
         const getSpecificReview = await Review.findById(reviewId);
 
@@ -136,12 +156,21 @@ const getReviewAvgByCourseId = async (req, res) => {
         courseReview: courseId
       })
 
+      const countReviews = findingReviews.length;
+      
+      let totalRatings = 0;
+      // using forEach to loop
+      findingReviews.forEach(item => {
+        totalRatings = totalRatings + item.rating
+      })
+      const avgRating = (totalRatings / countReviews).toFixed(1);
       // To do find AVG of all the ratings
-
+    
       return res
                 .status(200)
-                .json(findingReviews)
+                .json({average: avgRating})
     } catch (err) {
+        console.log(err);
         return res
                 .status(500)
                 .json({

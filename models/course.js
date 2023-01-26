@@ -2,7 +2,8 @@ const mongoose = require('mongoose')
 
 const CourseSchema = new mongoose.Schema({
     title: {
-        type: [String]
+        type: [String],
+        required: true
     },
     author: {
         type: mongoose.Types.ObjectId,
@@ -28,10 +29,13 @@ const CourseSchema = new mongoose.Schema({
     privacy: {
         type: Boolean,
         default: false
+    },
+    price: {
+        type: Number,
+        required: true
     }
 }, { timestamps: true })
 
 module.exports = mongoose.model('Course', CourseSchema);
 
 
-// online compiler, web chat app 

@@ -33,7 +33,8 @@ const uploadVideo = async (req, res) => {
                 tags: newTags,
                 author: req.user.id,
                 videoName: videoNameArr,
-                courseName: req.body.name
+                courseName: req.body.name,
+                price: req.body.price
         });
 
         const savedCourse = await newCourse.save();
