@@ -33,7 +33,7 @@ const CourseSchema = new mongoose.Schema({
     price: {
         type: Number,
         required: true
-    }
+    },
 }, { timestamps: true })
 
 module.exports = mongoose.model('Course', CourseSchema);

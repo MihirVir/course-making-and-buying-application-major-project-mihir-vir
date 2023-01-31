@@ -15,6 +15,7 @@ const uploadVideo = async (req, res) => {
         const tags = req.body.tags;
         let tagsArr = tags.split(',')
         let newTags = []
+       
         tagsArr.forEach(tag => {
             newTags = tag.trim(" ");
         })
@@ -34,7 +35,8 @@ const uploadVideo = async (req, res) => {
                 author: req.user.id,
                 videoName: videoNameArr,
                 courseName: req.body.name,
-                price: req.body.price
+                price: req.body.price,
+                
         });
 
         const savedCourse = await newCourse.save();
