@@ -1,69 +1,90 @@
-import React, { useReducer, useState } from 'react'
+import {useState, useReducer} from 'react'
+import { TextField, Alert } from '@mui/material';
 
-import { TextField, Button, Typography, Box,Grid, Divider, Stack, Paper } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
+import { registerReducer, INITIAL_STATE } from '../../reducers/registerReducer';
+
+import axios from 'axios';
 import './login.css'
-import { loginReducer, LOGIN_INITIAL_STATE } from '../../reducers/loginReducer'
-import axios from 'axios'
 
 const Login = () => {
-    const [state, dispatch] = useReducer(loginReducer, LOGIN_INITIAL_STATE);
+    const navigate = useNavigate();
+    const [state, dispatch] = useReducer(registerReducer, INITIAL_STATE);
     const [error, setError] = useState(false)
-    const handleChange = async (e) => {
-        
+    
+    function saveAccessToken(token) {
+        document.cookie = `access_token=${token}; path=/;`;
+    }
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const loginUrl = 'http://localhost:8000/auth/login';
+        const userDetails = {
+            email: state.email,
+            password: state.password
+        }
+
+        const res = await axios.post(loginUrl, userDetails)
+            
+            .catch((err) => setError(true));
+        if(res.status === 200) {
+            saveAccessToken(res.data.token);
+            navigate('/');
+        }
+    }
+
+    
+    const handleChange = (e) => {
         dispatch({
-            type: "LOGIN_CHANGE_INPUT",
+            type: "CHANGE_INPUT",
             payload: {
                 name: e.target.name,
                 value: e.target.value
             }
         })
-        
     }
-    
-    const navigate = useNavigate();
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        const url = "http://localhost:8000/auth/login";
-
-        const loginData = {email: state.email, password: state.password};
-        try {
-            const response = await axios.post(url, loginData);
-            console.log(response);
-        } catch (err) {
-            setError(true)
-        }
-
-    }
-    
   return (
     <>
-       <section className = "login">
-        <div className="container">
-            <form onSubmit={handleSubmit} >
-                <Stack 
-                    className = "stack"
-                    divider = {<Divider orientation='vertical' flexItem/>}>
-                        
-                        <Paper className = "paper" variant = "outlined" elevation={0}>
-                            <Typography className ="heading-card" variant = "h3">
-                                Enter your details
-                            </Typography>
-                            <TextField onChange = {handleChange} name = "email" className = "input-field"  label = "email" variant='outlined'/>
-                            <TextField onChange = {handleChange}  name = "password" className = "input-field" size = "Normal" label = "password" variant='outlined' type ="password" />
-                            <Button className = "submit-btn" variant='outlined' size = "large">
-                                Login
-                            </Button>
-                            <p className = "register" onClick = {() => navigate('/register')}>
-                                { error ? "something went wrong" : "don't have an account? click here to sign up"}
-                            </p>
-                        </Paper>
-                </Stack>
-            </form>
-        </div>
-       </section>
+        <section className = "login-section">
+            {
+                error ? (
+                    <>
+                        <Alert severity='error'>
+                            User Not Found Please Check Your Email and Password
+                        </Alert>
+                    </>
+                ) : ""
+            }
+            <div className="login-container">
+                <form onSubmit={handleSubmit} className = "login-form-style">
+                    <h2 className = "form-heading">
+                        Login Account
+                    </h2>
+                    <TextField
+                        onChange={handleChange}
+                        variant='outlined' 
+                        name = "email"
+                        label = "Email"     
+                        className = "text-view"
+                    />
+                    <TextField
+                        onChange={handleChange}
+                        variant='outlined' 
+                        name = "password"
+                        label = "Password"     
+                        type = "password"
+                        className = "text-view"
+                    />
+
+                    <button className = "submit-btn">
+                        Login
+                    </button>
+
+                    <p onClick = {() => {navigate('/')}}>
+                        Don't have an account? click to register
+                    </p>
+                </form>
+            </div>
+        </section>
     </>
   )
 }

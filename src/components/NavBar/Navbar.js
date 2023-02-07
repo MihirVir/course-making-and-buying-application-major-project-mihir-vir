@@ -1,25 +1,21 @@
-import { AppBar, Toolbar, styled, Typography } from '@mui/material'
-import {Pets} from '@mui/icons-material'
-import React from 'react'
 
-const StyledToolbar = styled(Toolbar) ({
-    display: "flex",
-    justifyContent: "space-between"
-})
+import React, {useEffect, useState} from 'react'
+import './nav.css'
 
 const Navbar = () => {
+    const [open, setOpen] = useState(false)
   return (
     <>
-        <AppBar position = "sticky">
-            <StyledToolbar>
-                <Typography variant = "h6" sx = {{ display: {xs: "none", sm: "block"}}}>
-                    Mihir's Major Project    
-                </Typography>
-                <Pets sx = {{ display: {xs: "block", sm: "none"}}}/>
-            </StyledToolbar>
+        <header className = "nav">
+            <nav className='nav-links'>
+                <h1 className='site-name'>
+                    Hustler University
+                </h1>
+                <input type="text" className='search-text'placeholder='type to search..'/>
             
-        </AppBar>
-
+            </nav>
+        </header>
+        
     </>
   )
 }

@@ -7,10 +7,8 @@ import './register.css'
 import { INITIAL_STATE, registerReducer } from '../../reducers/registerReducer'
 const Register = () => {
     const [state, dispatch] = useReducer(registerReducer, INITIAL_STATE);
-    const [error, setError] = useState(false)
     const [errorMessage, setErrorMessage] = useState("")
     const navigate = useNavigate();
-
     const handleChange = (e) => {
         dispatch({
             type: "CHANGE_INPUT",
@@ -30,9 +28,7 @@ const Register = () => {
             console.log(response);
             navigate('/');
         } catch (err) { 
-            if (error.response.status) {
-                setErrorMessage("user already exists")
-            }
+            
         }   
     }
     console.log(state.username, state.email, state.password);
@@ -48,33 +44,30 @@ const Register = () => {
                             divider = {<Divider orientation='vertical' flexItem/>}
                         >
 
-                            <item>
+                            <div>
                                 <Typography variant = "h4">
                                     { errorMessage === 'user already exists' ? "User Already Exist" : "Register" }
                                 </Typography>
-                            </item>
-                            <item>
+                            </div>
+                            <div>
                                 <TextField onChange={handleChange} name = "email"  className = "register-page-text-field" label = "Email" variant='outlined'/>
-                            </item>
-                            <item>
+                            </div>
+                            <div>
                                 <TextField onChange={handleChange} name = "username" className = "register-page-text-field" label = "username" variant = "outlined" />
-                            </item>
-                            <item>
+                            </div>
+                            <div>
                                 <TextField onChange={handleChange} name = "password"  className = "register-page-text-field" label = "password" variant = "outlined" type = "password" />
-                            </item>
-                            <item>
+                            </div>
+                            <div>
                                 <Button type = "submit"  name = "submit-btn" size = "large" className = "register-page-text-field" variant = "outlined">
                                     Register
                                 </Button>
-                            </item>
-                            <item>
+                            </div>
+                            <div>
                                 <p className = "register-page-para" onClick = {() => navigate('/')}>
                                     already have an account? Login
                                 </p>
-                            </item>
-                            <p>
-                                {error ? "Something went wrong" : ""}
-                            </p>
+                            </div>
                         </Stack>
                     </form>
                 </Paper>

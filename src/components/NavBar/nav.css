@@ -1,0 +1,29 @@
+body {
+    overflow-x: hidden;
+}
+.nav {
+    width: 100vw;
+    height: 8vh;
+    display: flex;
+    justify-content: center;
+    position: sticky;
+    background-color: rgb(20, 20, 20);
+}
+.nav-links {
+    height: 100%;
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.search-text {
+    height: 70%;
+    width: 27%;
+    padding: 10px;
+    outline: none;
+}
+.site-name {
+    color: white;
+    cursor: pointer;
+}
+
