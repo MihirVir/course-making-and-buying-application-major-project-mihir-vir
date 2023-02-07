@@ -60,6 +60,40 @@ const createNewCart = async (req, res) => {
 const clearCart = async (req, res) => {
     try {
         //TODO Later
+        const cartId = req.params.id;
+
+        const userId = req.user.id;
+
+        // finding cart exists or not
+        const isCart = await Cart.findOne({
+            cartId: id
+        })
+
+        if (!isCart) {
+            return res
+                    .status(404)
+                    .send({
+                        message: "cart not found"
+                    })
+        }
+
+        if (isCart.userId !== userId) {
+            return res
+                    .status(401)
+                    .send({
+                        message: "Unauthorized access"
+                    });
+        }
+
+        await Cart.findByIdAndDelete({
+            cartId: id
+        })
+        console.log(cartId);
+        return res
+                .status(200)
+                .send({
+                    message: "Cart deleted successfully"
+                })
     } catch (err) {
         return res
                 .status(500)
