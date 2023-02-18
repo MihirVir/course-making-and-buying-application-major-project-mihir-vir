@@ -2,7 +2,7 @@
     width: 99.9vw;
     /* background-color: blue; */
     overflow-x: hidden;
-    height: 100vh;
+    height: 92vh;
     position: relative;
 }
 .container {
@@ -10,7 +10,7 @@
     height: 100%;
     display: flex;
     position: absolute;
-    transition: all 1500ms ease;
+    transition: all 1s ease;
 }
 img {
     width: 100vw;

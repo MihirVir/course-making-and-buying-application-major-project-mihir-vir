@@ -6,7 +6,7 @@ const Slider = () => {
     const [current, setCurrent] = useState(0);
     setTimeout(() => {
         setCurrent(current === data.length - 1 ? 0 : current + 1);
-    }, 4100)
+    }, 5000)
     const prevSlide = () => {
         setCurrent(current === 0 ? data.length - 1 : (prev) => prev - 1);
     }

@@ -1,19 +1,21 @@
-import {useState, useReducer} from 'react'
+import {useState, useReducer, useEffect} from 'react'
 import { TextField, Alert } from '@mui/material';
 
 import { useNavigate } from 'react-router-dom'
 import { registerReducer, INITIAL_STATE } from '../../reducers/registerReducer';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import './login.css'
+import SetCookie from '../../hooks/setCookie';
 
 const Login = () => {
     const navigate = useNavigate();
     const [state, dispatch] = useReducer(registerReducer, INITIAL_STATE);
     const [error, setError] = useState(false)
-    
+    const [success, setSuccess] = useState(false)
     function saveAccessToken(token) {
-        document.cookie = `access_token=${token}; path=/;`;
+        SetCookie('access_token', token);
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -24,8 +26,6 @@ const Login = () => {
         }
 
         const res = await axios.post(loginUrl, userDetails)
-            
-            .catch((err) => setError(true));
         if(res.status === 200) {
             saveAccessToken(res.data.token);
             navigate('/');
@@ -42,9 +42,16 @@ const Login = () => {
             }
         })
     }
+
+    useEffect(() => {
+        if (error) {
+            toast.error("Error: User not found or Please Check Your Email and Password")
+        }
+    }, [success, error])
   return (
     <>
         <section className = "login-section">
+            <ToastContainer />
             {
                 error ? (
                     <>
