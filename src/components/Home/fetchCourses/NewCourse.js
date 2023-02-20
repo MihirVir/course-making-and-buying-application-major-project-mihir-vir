@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Paper } from '@mui/material';
 import axios from 'axios'
+import { Link } from 'react-router-dom';
 import './newcourse.css'
 import GetCookie from '../../../hooks/GetCookie';
 const NewCourse = ({accessToken}) => {
@@ -54,7 +55,7 @@ const NewCourse = ({accessToken}) => {
             <div className="home-rec-card">
               <div className="home-rec-card-items">
                 {
-                  result.map((item, idx) => {
+                  result.length > 0 ? result.map((item, idx) => {
                     return (
                       <>
                         <Paper key = {idx} className = "paper-bg" sx = {{backgroundColor: "rgb(28,29,31)",  transition: "all 200ms ease-in-out;"}} variant='outlined' elevation={24}>
@@ -75,10 +76,98 @@ const NewCourse = ({accessToken}) => {
                         </Paper>
                       </>
                     )
-                  })
-                }
+                  }) : (
+                    <>  
+                      <Paper className = "paper-bg" sx = {{backgroundColor: "rgb(28,29,31)",  transition: "all 200ms ease-in-out;"}} variant='outlined' elevation={24}>
+                            <div className="items-container">
+                              <img src="https://images.genius.com/16685aa5246f25cbb660782ad7a32735.1000x1000x1.png" alt="" />
+                              <div className="name-and-price">
+                                <span className="name">
+                                    test
+                                </span>
+                                <div className="price">
+                                  $123
+                                </div>
+                              </div>
+                              <div className="rating-container">
+                                4
+                              </div>
+                            </div>
+                        </Paper>
+                        <Paper className = "paper-bg" sx = {{backgroundColor: "rgb(28,29,31)",  transition: "all 200ms ease-in-out;"}} variant='outlined' elevation={24}>
+                            <div className="items-container">
+                              <img src="https://images.genius.com/16685aa5246f25cbb660782ad7a32735.1000x1000x1.png" alt="" />
+                              <div className="name-and-price">
+                                <span className="name">
+                                    test
+                                </span>
+                                <div className="price">
+                                  $123
+                                </div>
+                              </div>
+                              <div className="rating-container">
+                                4
+                              </div>
+                            </div>
+                        </Paper>
+                        <Paper className = "paper-bg" sx = {{backgroundColor: "rgb(28,29,31)",  transition: "all 200ms ease-in-out;"}} variant='outlined' elevation={24}>
+                            <div className="items-container">
+                              <img src="https://images.genius.com/16685aa5246f25cbb660782ad7a32735.1000x1000x1.png" alt="" />
+                              <div className="name-and-price">
+                                <span className="name">
+                                    test
+                                </span>
+                                <div className="price">
+                                  $123
+                                </div>
+                              </div>
+                              <div className="rating-container">
+                                4
+                              </div>
+                            </div>
+                        </Paper>
+                        <Paper className = "paper-bg" sx = {{backgroundColor: "rgb(28,29,31)",  transition: "all 200ms ease-in-out;"}} variant='outlined' elevation={24}>
+                            <div className="items-container">
+                              <img src="https://images.genius.com/16685aa5246f25cbb660782ad7a32735.1000x1000x1.png" alt="" />
+                              <div className="name-and-price">
+                                <span className="name">
+                                    test
+                                </span>
+                                <div className="price">
+                                  $123
+                                </div>
+                              </div>
+                              <div className="rating-container">
+                                4
+                              </div>
+                            </div>
+                        </Paper>
+                        <Paper className = "paper-bg" sx = {{backgroundColor: "rgb(28,29,31)",  transition: "all 200ms ease-in-out;"}} variant='outlined' elevation={24}>
+                            <div className="items-container">
+                              <img src="https://images.genius.com/16685aa5246f25cbb660782ad7a32735.1000x1000x1.png" alt="" />
+                              <div className="name-and-price">
+                                <span className="name">
+                                    test
+                                </span>
+                                <div className="price">
+                                  $123
+                                </div>
+                              </div>
+                              <div className="rating-container">
+                                4
+                              </div>
+                            </div>
+                        </Paper>
+                    </> 
+                  )
+                }  
               </div>
             </div>
+              <h2 style={{padding: "10px"}}>docs</h2>
+              <a href="">these links may or maynot work so please add it manually!</a>
+              <Link to="/login">Login Page Colors Not Fixed! add /login path to the url</Link>
+              <Link to = "/course/123">Course Detail Page add /course/123 to the url</Link>
+              <h1 style={{padding: "10px"}}>Doesn't work on MOBILE</h1>
         </section>
       </>
     );

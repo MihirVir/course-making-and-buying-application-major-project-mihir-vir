@@ -36,7 +36,7 @@ const CourseTItle = () => {
             <Paper className = "specific-course-paper" sx={{height: "62vh", width: "28vw"}} elevation={4}>
                 <img className ="specific-course-img" src="https://www.freecodecamp.org/news/content/images/2021/06/backendpython.png" alt="" />
                 <div className="specific-course-item-details">
-                    <ul>
+                    <ul className = "fixed-pos-li">
                         <li>
                             <h4>
                                 $440                        

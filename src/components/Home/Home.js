@@ -23,9 +23,9 @@ const Home = () => {
   console.log(accessToken);
   
   useEffect(() => {
-    if (accessToken == null) {
-      navigate('/login')
-    }
+    // if (accessToken == null) {
+    //   navigate('/login')
+    // }
   }, [])
 
 

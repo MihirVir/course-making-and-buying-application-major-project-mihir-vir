@@ -18,14 +18,14 @@ nav {
 
     height: 100%;
 }
-ul {
+nav > ul {
     width: 85%;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
-li {
+nav>ul>li {
     height: 90%;
     display: flex;
     justify-content: center;

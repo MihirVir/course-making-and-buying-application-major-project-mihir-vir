@@ -20,7 +20,6 @@ const CustomNav = () => {
         const response = await axios.get(searchURL);
         setResults(response.data);
     }
-    console.log(results);
 
     useEffect(() => {
         if (text.length > 2) {

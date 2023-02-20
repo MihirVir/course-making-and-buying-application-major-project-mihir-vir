@@ -1,0 +1,51 @@
+.topic-container-section {
+    width: 70%;
+    min-height: 40vh;
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+}
+.course-content-details {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid lightgray;
+}
+.topic-list {
+    padding-left: 15px;
+}
+.desc-paper-container {
+    padding-bottom: 10px;
+}
+.course-desc-paper-container {
+    text-transform: uppercase;
+    color: black;
+    font-size: 24px;
+    font-weight: 900;
+    height: 110%;
+    cursor: pointer;
+    transition: all 100ms ease-in-out;
+}
+.course-desc-paper-container:hover{
+    color: rgb(164,53,240);
+}
+.topic-paper-desc-text {
+    width: 99%;
+    text-align: justify;
+}
+.course-content-details-title {
+    text-transform: uppercase;
+    font-weight: 900;
+}
+.topic-list {
+    font-size: 14px;
+}
+.topic-list li {
+    margin-top: 5px;
+    margin-left: 5px;
+}
+.desc-paper-container {
+    padding: 10px;
+    border-bottom: 1px solid lightgray;
+    margin-bottom: 10px;
+}

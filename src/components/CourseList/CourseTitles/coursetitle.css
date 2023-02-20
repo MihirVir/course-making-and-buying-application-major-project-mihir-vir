@@ -8,6 +8,9 @@
     justify-content: space-between;
     padding-top: 20px;
 }
+.fixed-pos-li {
+    list-style: none;
+}
 .specific-course-img {
     height: 100%;
     width: 100%;
@@ -91,18 +94,16 @@
     justify-content: space-between;
 }
 .policy {
-
     font-size: .8rem;
-    margin-top: -10px;
 }
 .cart-btn-container {
     width: 100%;
-    height: 100%;
-    margin-bottom: 10px;
+    height: 80%;
+
 }
 .cart-btn {
     width: 100%;
-    height: 100%;
+    height: 80%;
     border: 1px solid rgb(164,53,240);
     background-color: transparent;
     font-weight: 800;
@@ -113,11 +114,11 @@
 }
 .buy-btn-container {
     width: 100%;
-    height: 100%;
+    height: 80%;
 }
 .buy-btn {
     width: 100%;
-    height: 100%;
+    height: 80%;
     background-color: rgb(164,53,240);
     border: none;
     font-weight: 800;
