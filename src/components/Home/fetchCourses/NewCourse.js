@@ -167,6 +167,7 @@ const NewCourse = ({accessToken}) => {
               <a href="">these links may or maynot work so please add it manually!</a>
               <Link to="/login">Login Page Colors Not Fixed! add /login path to the url</Link>
               <Link to = "/course/123">Course Detail Page add /course/123 to the url</Link>
+              <Link to  = "course/video/1">Video Player Page add /course/video/1 to the url</Link>
               <h1 style={{padding: "10px"}}>Doesn't work on MOBILE</h1>
         </section>
       </>

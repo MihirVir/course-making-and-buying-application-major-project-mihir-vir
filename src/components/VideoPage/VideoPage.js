@@ -2,9 +2,9 @@ import React, {useState, useRef} from 'react'
 import reaching from '../../reaching2/sui.mp4'
 import PlayArrowIcon from '@mui/icons-material/PlayArrow'; // play icon
 import PauseIcon from '@mui/icons-material/Pause'; // Pause Icon
-import TheatersIcon from '@mui/icons-material/Theaters';
-import FullscreenIcon from '@mui/icons-material/Fullscreen';
-import RadioIcon from '@mui/icons-material/Radio';
+import VolumeOffIcon from '@mui/icons-material/VolumeOff';
+import VolumeDownIcon from '@mui/icons-material/VolumeDown';
+import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import './videopage.css'
 const VideoPage = () => {
   const [isPlay, setIsPlay] = useState(false);
@@ -14,7 +14,8 @@ const VideoPage = () => {
   const theaterRef = useRef();
   const fullScreenRef = useRef();
   const miniPlayerRef = useRef();
-
+  const volumeRef = useRef();
+  const sliderRef = useRef();
   const playPauseHandler = () => {
     setIsPlay(!isPlay)
     togglePlay();
@@ -35,18 +36,21 @@ const VideoPage = () => {
     setIsPlay(!isPlay);
     togglePlay();
   }
-  const onKeyDownHandler = (e) => {
+  document.addEventListener('keydown', (e) => {
+    
     switch (e.key.toLowerCase()) {
-      case " ":
-      case "k":
-        setIsPlay(!isPlay);
-        togglePlay();
-        break;
       case "f":
         toggleFullScreenMode();
         break;
+      case 't':
+        toggleTheater();
+        break;
+      case 'i':
+        toggleMiniPlayerMode();
+        break;
     }
-  }
+  })
+  
 
   // view modes
   
@@ -74,7 +78,7 @@ const VideoPage = () => {
   }
   function toggleMiniPlayerMode() {
     if (containerRef.current.classList.contains("mini-player")) {
-      document.exitPictureInPicture();
+      document.current.exitPictureInPicture();
       containerRef.current.classList.remove("mini-player");
     } else {
       containerRef.current.classList.add("mini-player");
@@ -84,9 +88,30 @@ const VideoPage = () => {
   document.addEventListener("fullscreenchange",() => {
     containerRef.current.classList.toggle("full-screen", document.fullscreenElement);
   })
+
+  // volume slider 
+  
+  const handleVolumeOnClick = () => {
+    toggleVolumeMuteUnmute();
+  }
+
+  function toggleVolumeMuteUnmute() {
+    videoRef.current.muted = !videoRef.current.muted;
+  }
+
+  const handleOnVolumeChange = () => {
+
+  }
+  const handleOnInputSlider = (e) => {
+    videoRef.current.volume = e.target.value;
+    videoRef.current.muted = e.target.value === 0;
+  }
   return (
-    <section  onKeyUp={onKeyDownHandler} className="video-page-section">
-        <div ref = {containerRef} className="video-container pause">
+    <section   className="video-page-section">
+      <h2>
+        Working on it
+      </h2>
+        <div ref = {containerRef} className="video-container pause" data-volume-level="low">
           <div className="video-controls-container">
             <div className="timeline-controls"></div>
             <div className="controls">
@@ -95,6 +120,12 @@ const VideoPage = () => {
                 <PlayArrowIcon className = "play-icon"/>
                 <PauseIcon className='pause-icon'/>
               </button>
+              <div className="volume-container">
+                <button className="mute-btn">
+                    <VolumeUpIcon onClick = {handleVolumeOnClick} ref = {volumeRef} className = "volume-high-icon" />
+                </button>
+                <input onInput={handleOnInputSlider} ref = {sliderRef} className = "volume-slider" type="range" min = {0} max = {1} step="any"/>
+              </div>
               <button onClick={handleMiniPlayerMode} ref = {miniPlayerRef} className="mini-player-btn">
                   <svg viewBox="0 0 24 24">
                     <path fill="currentColor" d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H3V5h18v14zm-10-7h9v6h-9z"/>
@@ -118,7 +149,7 @@ const VideoPage = () => {
               </button>
             </div>
           </div>
-          <video ref = {videoRef} onClick = {handleVideoOnClick}  className = "course-video-player" src={reaching} controlsList="nodownload"></video>
+          <video autoPlay onVolumeChange={handleOnVolumeChange} ref = {videoRef} onClick = {handleVideoOnClick}  className = "course-video-player" src={reaching} controlsList="nodownload"></video>
         </div>
     </section>
   )
