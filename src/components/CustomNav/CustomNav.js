@@ -16,7 +16,7 @@ const CustomNav = () => {
     }
 
     const fetchData = async () => {
-        const searchURL = `https://backend-course-app-production.up.railway.app/course/search?q=${text}`
+        const searchURL = `http://localhost:8000/course/search?q=${text}`
         const response = await axios.get(searchURL);
         setResults(response.data);
     }
@@ -52,7 +52,7 @@ const CustomNav = () => {
                                                     results.length > 0 ? results.map((item ,idx) => {
                                                         return (
                                                             <>
-                                                                <a href={`https://backend-course-app-production.up.railway.app/course/${item._id}`}>{item.courseName}</a>
+                                                                <a href={`/course/${item._id}`}>{item.courseName}</a>
                                                             </>
                                                         )
                                                     }) : <a href="">No Results</a>
