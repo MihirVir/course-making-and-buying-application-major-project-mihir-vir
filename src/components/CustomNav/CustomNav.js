@@ -52,7 +52,7 @@ const CustomNav = () => {
                                                     results.length > 0 ? results.map((item ,idx) => {
                                                         return (
                                                             <>
-                                                                <a href={`http://localhost:3000/course/${item._id}`}>{item.courseName}</a>
+                                                                <a href={`https://backend-course-app-production.up.railway.app/course/${item._id}`}>{item.courseName}</a>
                                                             </>
                                                         )
                                                     }) : <a href="">No Results</a>
