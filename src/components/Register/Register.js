@@ -21,7 +21,7 @@ const Register = () => {
     
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const url = "http://localhost:8000/auth/register"
+        const url = "https://backend-course-app-production.up.railway.app/auth/register"
         const post = { email: state.email, username: state.username, password: state.password}
         try {
             const response = await axios.post(url, post)

@@ -34,7 +34,7 @@ const NewCourse = ({accessToken}) => {
   // }
  
   const fetchCourseRecData = async () => {
-      const url = `http://localhost:8000/course/recommended`
+      const url = `https://backend-course-app-production.up.railway.app/course/recommended`
       const result = await axios.get(url, {
         withCredentials: true
       });
