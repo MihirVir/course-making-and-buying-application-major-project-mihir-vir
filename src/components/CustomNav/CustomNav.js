@@ -16,7 +16,7 @@ const CustomNav = () => {
     }
 
     const fetchData = async () => {
-        const searchURL = `http://localhost:8000/course/search?q=${text}`
+        const searchURL = `https://backend-course-app-production.up.railway.app/course/search?q=${text}`
         const response = await axios.get(searchURL);
         setResults(response.data);
     }
