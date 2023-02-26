@@ -49,3 +49,6 @@
     border-bottom: 1px solid lightgray;
     margin-bottom: 10px;
 }
+.course-content-li {
+    cursor: pointer;
+}

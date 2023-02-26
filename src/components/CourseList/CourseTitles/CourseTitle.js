@@ -1,25 +1,26 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import { Paper, Rating } from '@mui/material'
 import './coursetitle.css'
-const CourseTItle = () => {
-  return (
+import axios from 'axios'
+const CourseTitle = ({courseDetails}) => {
+    const [restObject, setRestObject] = useState({});
+
+    return (
     <>
         <section className="specific-course-details">
             <div className="specific-course-details-first-col">
                 <h4 className = "course-name-title">
-                    Introduction To Backend Development Using NodeJS
+                    {courseDetails.courseName || "failed to load"}
                 </h4>
                 <p className = "short-desc-course">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus sunt aperiam dolorem cupiditate corrupti! Eligendi temporibus nostrum et quos porro.
                 </p>
                 <div className="rating">
                     <span className="rating-text">
-                        4
+                        {courseDetails.rating}
                     </span>
-                    <Rating name="read-only" value={3.5} readOnly />
-                    <span className="rated-by">
-                        (100 ratings)
-                    </span>
+                    <Rating sx={{filter: 'invert(100);', color: "#000"}} name="read-only" value={courseDetails.rating || 0} readOnly />
+                    
                 </div>
                 <p className = "course-language">
                     English
@@ -29,7 +30,7 @@ const CourseTItle = () => {
                         Created by:
                     </span>
                     <span className = "developers-username">
-                        Mihir Vir
+                        {courseDetails.author.username}
                     </span>
                 </div>
             </div>
@@ -60,4 +61,4 @@ const CourseTItle = () => {
   )
 }
 
-export default CourseTItle
+export default CourseTitle

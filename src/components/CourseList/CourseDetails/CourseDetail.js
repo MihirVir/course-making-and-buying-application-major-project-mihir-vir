@@ -1,7 +1,8 @@
 import React from 'react'
-import { Paper } from '@mui/material'
+import {Paper } from '@mui/material'
+import {Link} from 'react-router-dom'
 import "./coursedetail.css"
-const CourseDetail = () => {
+const CourseDetail = ({ courseDetails, purchased }) => {
   return (
     <>
         <section className="topic-container-section">
@@ -23,11 +24,29 @@ const CourseDetail = () => {
                         <span className = "course-desc-paper-container">T</span>
                        
                         <ol className = "topic-list">
-                            <li>Connecting to a server</li>
-                            <li>Connecting a database to your server</li>
-                            <li>What's mongoDB</li>
-                            <li>downloading packages</li>
-                            <li>using mongoose</li>
+                            {courseDetails.title ? courseDetails?.title.map((item, idx) => {
+                              return (
+                                <>
+                                  {purchased ? (<li className = "course-content-li">
+                                      <Link to = {`/course/video/${courseDetails._id}/${idx}`}>
+                                        {item}
+                                      </Link>
+                                  </li>) : (
+                                    <>
+                                        <li className = "course-content-li">
+                                            <Link>
+                                              {item}
+                                            </Link>
+                                        </li>
+                                    </>
+                                  )}
+                                </>
+                              )
+                            }) : (
+                              <>
+                                No Course Content
+                              </>
+                            )}
                         </ol>
                 </div>
             </div>

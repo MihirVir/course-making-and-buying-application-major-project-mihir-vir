@@ -12,6 +12,7 @@ import Register from './components/Register/Register'
 import CustomNav from './components/CustomNav/CustomNav';
 import CourseList from './components/CourseList/CourseList';
 import Home from './components/Home/Home';
+import VideoPage from './components/VideoPage/VideoPage';
 function App() {
   return (
     <>
@@ -23,6 +24,7 @@ function App() {
             <Route exact path = "/" element = {<Home />}></Route>
             <Route exact path = "/course/:id" element = {<CourseList />}></Route>
             <Route exact path = "/custom" element = {<CustomNav />}></Route>
+            <Route exact path = "/course/:id/:videoIndex" element = {<VideoPage/>}></Route>
           </Routes>
       </Router>
     </>
