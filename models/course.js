@@ -34,6 +34,10 @@ const CourseSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    rating: {
+        type: Number,
+        default: 0
+    }
 }, { timestamps: true })
 
 module.exports = mongoose.model('Course', CourseSchema);

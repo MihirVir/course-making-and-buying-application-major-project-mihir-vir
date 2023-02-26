@@ -1,4 +1,6 @@
 const Course = require('../models/course');
+const Purchased = require('../models/purchased');
+
 const uploadVideo = async (req, res) => {
     try {
         let arr = [];
@@ -297,6 +299,125 @@ const searchVideoUsingRegEx = async (req, res) => {
     }
 }
 
+const getRecommendedCourse = async (req, res) => {
+    try {
+        const sharingRandomCourse = await Course.find().limit(5);
+        
+        return res
+                .status(200)
+                .json(sharingRandomCourse);
+    } catch (err) {
+        return res
+                .status(500)
+                .json({
+                    message: "Internal Server Error"
+                })
+    }
+}
+
+const getWithoutVideos = async (req, res) => {
+    try {
+        const courseId = req.params.id;
+        const user = req.user.id;
+
+        // if video purchased response will be with videos or author then videos else no video
+
+        // find course with id
+
+        const coursing = await Course.findOne({
+            _id: courseId
+        }).populate('author');
+        console.log("not suii", coursing);
+        if (coursing === null) {
+            return res
+                .status(404)
+                .json()
+        }
+        if (coursing.author === user) {
+            return res
+                    .status(200)
+                    .json(coursing);
+        }
+        // customer, coursesPurchased
+        const isPurchased = await Purchased.findOne({ customer: user, coursesPurchased: {$in: courseId}});
+        
+        if (isPurchased) {
+            return res
+                    .status(200)
+                    .json(coursing);
+        }
+
+        const {_id, rating, courseName, price, tags, title,privacy, author, video, videoName} = coursing;
+        
+        const rest = {
+            _id,
+            rating, 
+            courseName,
+            price,
+            tags,
+            author,
+            privacy,
+            title
+        }
+        console.log(isPurchased);
+        return res
+                .status(200)
+                .json(purchased = {rest, isPurchased});
+
+        
+    } catch (err) {
+        console.log(err);
+        return res
+                .status(500)
+                .json({
+                    message: "Internal Server Error"
+                })
+    }
+}
+
+const sendingVideoIndex = async (req, res) => {
+    try  {
+        const courseId = req.params.id;
+        const videoIndex = req.params.videoIndex;
+
+        // searching the course
+        const course = await Course.findOne({
+            _id: courseId
+        });
+
+        if (!course) {
+            return res
+                    .status(404)
+                    .json({
+                        message: "Course Not Found"
+                    })
+        }
+        if (course.videoName[videoIndex] === undefined) {
+            return res
+                    .status(404)
+                    .json({
+                        message: "Video Not Found"
+                    })
+        }
+
+        const videoObj = {
+            videoName: course.videoName[videoIndex],
+            video: course.video[videoIndex],
+            title: course.title[videoIndex]
+        }
+        return res
+                .status(200)
+                .json(videoObj);
+    } catch (err) {
+        console.log(err);
+        return res
+                .status(500)
+                .json({
+                    message: "Internal Server Error"
+                })
+    }
+}
+
 module.exports = {
     uploadVideo,
     removeAllCourses,
@@ -306,5 +427,8 @@ module.exports = {
     deleteSpecificVideo,
     updateCourse,
     getVideoByTags,
-    searchVideoUsingRegEx
+    searchVideoUsingRegEx,
+    getRecommendedCourse,
+    getWithoutVideos,
+    sendingVideoIndex
 }

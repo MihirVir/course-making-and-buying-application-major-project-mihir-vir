@@ -1,5 +1,5 @@
 const Purchased = require('../models/purchased');
-const { findByIdAndDelete } = require('../models/review');
+
 
 const createPurchased = async (req, res) => {
     try {
@@ -15,9 +15,10 @@ const createPurchased = async (req, res) => {
                 message: "Course Already Purchased"
             })
         }
-        const creatingUser = new Purchased();
-        creatingUser.customer = userId;
-        creatingUser.coursesPurchased = courseId;
+        const creatingUser = new Purchased({
+            customer:  userId,
+            coursesPurchased: courseId
+        });
 
         const savedUserPurchase = await creatingUser.save();
 
@@ -142,9 +143,19 @@ const deleteAllRecords = async (req, res) => {
                 })
     }
 }
+const getAllPurchase = async (req, res) => {
+    try {
+        const purch = await Purchased.find();
+        return res.status(200)
+                    .json(purch)
+    } catch (err) {
+        
+    }
+}
 module.exports = {
     createPurchased,
     gettingPurchasedProducts,
     deleteAllRecords,
-    returnPurchasedProduct
+    returnPurchasedProduct,
+    getAllPurchase
 }

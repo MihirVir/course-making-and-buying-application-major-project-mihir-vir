@@ -164,8 +164,9 @@ const getReviewAvgByCourseId = async (req, res) => {
         totalRatings = totalRatings + item.rating
       })
       const avgRating = (totalRatings / countReviews).toFixed(1);
-      // To do find AVG of all the ratings
-    
+      // saving avg in course controller
+      
+
       return res
                 .status(200)
                 .json({average: avgRating})
