@@ -6,42 +6,17 @@ import './newcourse.css'
 import GetCookie from '../../../hooks/GetCookie';
 const NewCourse = ({accessToken}) => {
   const [result, setResult] = useState([]);
-  // https://emantav.in/wp-content/uploads/2021/04/Pte-course-img.png
-  // {
-  //   result.map((item) => {
-  //     return (
-  //       <>
-  //           <a href={`http://localhost:8000/course/${item._id}`}>
-
-  //               <div key = {item._id} className="card-container">
-  //                 <img className='card-img' src="https://www.maacindia.com/images/courses/course-img-35.jpg" alt="" />
-  //                 <div className="card-course">
-  //                   <div className="name-and-price">
-  //                     <span>{item.courseName}</span>
-  //                     <span>{item.price}</span>
-  //                   </div>
-  //                   <div className="rating">
-  //                     <p>
-  //                       {item.rating}
-  //                     </p>
-  //                   </div>
-  //                 </div>
-  //             </div>
-  //           </a>
-  //       </>
-  //     )
-  //   })
-  // }
- 
   const fetchCourseRecData = async () => {
-      const url = `https://backend-course-app-production.up.railway.app/course/recommended`
-      const res = await axios.get(url, {
-        withCredentials: true,
-        
-      })
-      setResult(res.data)
+    const url = `https://backend-course-app-production-1670.up.railway.app/course/recommended`
+    const res = await axios.get(url, {
+      withCredentials: true,
+      headers: {
+        'Access-Control-Allow-Origin' : '*'
+      }
+    });
+    setResult(res.data)
   }
-
+  
   useEffect(() => {
     fetchCourseRecData();
   }, [])
