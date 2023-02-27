@@ -11,7 +11,8 @@ const NewCourse = ({accessToken}) => {
     const res = await axios.get(url, {
       withCredentials: true,
       headers: {
-        'Access-Control-Allow-Origin' : '*'
+        'Access-Control-Allow-Origin' : '*',
+        'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
       }
     });
     setResult(res.data)
