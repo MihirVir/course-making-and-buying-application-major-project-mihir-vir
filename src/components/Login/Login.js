@@ -19,7 +19,7 @@ const Login = () => {
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const loginUrl = 'https://backend-course-app-production.up.railway.app/auth/login';
+        const loginUrl = 'http://localhost:8000/auth/login';
         const userDetails = {
             email: state.email,
             password: state.password

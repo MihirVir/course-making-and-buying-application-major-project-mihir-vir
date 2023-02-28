@@ -3,6 +3,7 @@ import { Paper } from '@mui/material';
 import axios from 'axios'
 import { Link } from 'react-router-dom';
 import './newcourse.css'
+import Cookies from 'js-cookie';
 import GetCookie from '../../../hooks/GetCookie';
 const NewCourse = ({accessToken}) => {
   const [result, setResult] = useState([]);
@@ -10,7 +11,10 @@ const NewCourse = ({accessToken}) => {
     const url = `https://backend-course-app-production-1670.up.railway.app/course/recommended`
     const res = await axios.get(url, {
       withCredentials: true,
-      xsrfCookieName: "access_token",
+      headers: {
+        "Access-Control-Allow-Origin": "http://localhost:3000/",
+        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
+      }
     });
     setResult(res.data)
   }
