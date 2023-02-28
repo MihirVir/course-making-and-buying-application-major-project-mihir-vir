@@ -14,12 +14,12 @@ const Login = () => {
     const [state, dispatch] = useReducer(registerReducer, INITIAL_STATE);
     const [error, setError] = useState(false)
     const [success, setSuccess] = useState(false)
-    function saveAccessToken(token) {
-        SetCookie('access_token', token);
-    }
+    // function saveAccessToken(token) {
+    //     SetCookie('access_token', token);
+    // }
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const loginUrl = 'http://localhost:8000/auth/login';
+        const loginUrl = 'https://https://backend-course-app-production-1670.up.railway.app/auth/login';
         const userDetails = {
             email: state.email,
             password: state.password
@@ -27,7 +27,7 @@ const Login = () => {
 
         const res = await axios.post(loginUrl, userDetails)
         if(res.status === 200) {
-            saveAccessToken(res.data.token);
+            // saveAccessToken(res.data.token);
             navigate('/');
         }
     }

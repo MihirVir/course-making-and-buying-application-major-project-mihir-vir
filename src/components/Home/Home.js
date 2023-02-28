@@ -23,9 +23,7 @@ const Home = () => {
   console.log(accessToken);
   
   useEffect(() => {
-    // if (accessToken == null) {
-    //   navigate('/login')
-    // }
+  
   }, [])
 
 
