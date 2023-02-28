@@ -10,10 +10,7 @@ const NewCourse = ({accessToken}) => {
     const url = `https://backend-course-app-production-1670.up.railway.app/course/recommended`
     const res = await axios.get(url, {
       withCredentials: true,
-      headers: {
-        'Access-Control-Allow-Origin' : '*',
-        'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-      }
+      xsrfCookieName: "access_token",
     });
     setResult(res.data)
   }
