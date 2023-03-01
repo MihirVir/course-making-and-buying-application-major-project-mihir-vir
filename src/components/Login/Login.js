@@ -11,28 +11,28 @@ import SetCookie from '../../hooks/setCookie';
 
 const Login = () => {
     const navigate = useNavigate();
+    const [user, setUser] = useState(null)
     const [state, dispatch] = useReducer(registerReducer, INITIAL_STATE);
     const [error, setError] = useState(false)
     const [success, setSuccess] = useState(false)
-    // function saveAccessToken(token) {
-    //     SetCookie('access_token', token);
-    // }
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const loginUrl = 'https://https://backend-course-app-production-1670.up.railway.app/auth/login';
+        const loginUrl = 'https://backend-course-app-production-1670.up.railway.app/auth/login';
         const userDetails = {
             email: state.email,
             password: state.password
         }
 
         const res = await axios.post(loginUrl, userDetails)
+        setUser(res.data.token);
+        localStorage.setItem("token", JSON.stringify(res.data.token));
         if(res.status === 200) {
             // saveAccessToken(res.data.token);
             navigate('/');
         }
     }
 
-    
     const handleChange = (e) => {
         dispatch({
             type: "CHANGE_INPUT",

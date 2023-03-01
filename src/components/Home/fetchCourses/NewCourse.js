@@ -13,12 +13,13 @@ const NewCourse = ({accessToken}) => {
       withCredentials: true,
       headers: {
         "Access-Control-Allow-Origin": "http://localhost:3000/",
-        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
+        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+        "Authorization": `Bearer ${JSON.parse(localStorage.getItem("token"))}`
       }
     });
     setResult(res.data)
   }
-  
+  console.log("using get cookie", GetCookie("access_token"));
   useEffect(() => {
     fetchCourseRecData();
   }, [])

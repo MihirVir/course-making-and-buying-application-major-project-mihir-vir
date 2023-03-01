@@ -6,6 +6,7 @@ import CourseDetail from './CourseDetails/CourseDetail'
 import CourseVideo from './CourseVideo/CourseVideo'
 import axios from 'axios'
 const CourseList = () => {
+  const [loading, setLoading] = useState(true);
   const [courseDetails, setCourseDetails] = useState({
       author: {
           username: ""
@@ -18,9 +19,14 @@ const CourseList = () => {
   const fetchData = async () => {
     const url = `https://backend-course-app-production-1670.up.railway.app/course/${gettingCourseId}`
     const result = await axios.get(url, {
-      withCredentials: false
+      withCredentials: false,
+      headers: {
+        "Authorization": `Bearer ${JSON.parse(localStorage.getItem("token"))}`
+      }
     });
+
     setCourseDetails(result.data.rest);
+    setLoading(false);
     if (result.data.isPurchased != null) {
       setIsPurchased(true);
     }
@@ -34,12 +40,14 @@ const CourseList = () => {
   console.log(courseDetails);
   return (
     <>
+    <section onContextMenu={e => e.preventDefault()}>
       <CustomNav />
-      <CourseTitle courseDetails={courseDetails} purchased = {isPurchased}/>
-      <CourseDetail courseDetails={courseDetails} purchased ={isPurchased}/>
+      <CourseTitle courseDetails={courseDetails} purchased = {isPurchased} isLoading={loading}/>
+      <CourseDetail courseDetails={courseDetails} purchased ={isPurchased} isLoading={loading}/>
       <CourseVideo />
+    </section>
     </>
   )
 }
-
+ 
 export default CourseList
