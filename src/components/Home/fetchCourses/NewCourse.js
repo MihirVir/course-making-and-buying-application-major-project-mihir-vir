@@ -145,6 +145,7 @@ const NewCourse = ({accessToken}) => {
               <h2 style={{padding: "10px"}}>docs</h2>
               <a href="">these links may or maynot work so please add it manually!</a>
               <Link to="/login">Login Page Colors Not Fixed! add /login path to the url</Link>
+              <Link>You need to Login by clicking on the above link and type how to or smthng like that to access course page the below link of /course/123 doesn't work cuz now i've connected the frontend with the backend</Link>
               <Link to = "/course/123">Course Detail Page add /course/123 to the url</Link>
               <Link to  = "course/video/1">Video Player Page add /course/video/1 to the url</Link>
               <h1 style={{padding: "10px"}}>Doesn't work on MOBILE</h1>
