@@ -58,3 +58,14 @@ img {
     color: rgb(164,53,240);
     font-weight: 900;
 }
+.docs {
+
+    text-decoration: none;
+    padding: 8px;
+    color: #0e0e0e;
+    padding-left: 20px;
+
+}
+.docs:hover {
+    background-color: #dedede; 
+}

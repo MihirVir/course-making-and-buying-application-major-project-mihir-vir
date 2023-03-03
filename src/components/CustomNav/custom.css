@@ -50,6 +50,8 @@ nav>ul>li {
 .site-heading-title {
     font-size: 2rem;
     font-weight: 800;
+    cursor: pointer;
+    
 }
 .search-inp::placeholder {
     font-weight: 300;
@@ -74,15 +76,15 @@ nav>ul>li {
     overflow: hidden;
     width: 100%;
 }
-a {
+/* a {
     text-decoration: none;
     padding: 8px;
     color: #0e0e0e;
     padding-left: 20px;
 }
 a:hover {
-    background-color: #dedede;
-}
+    background-color: #dedede; */
+/* } */
 .user-options-result {
     position: absolute;
     top: 13%;
@@ -122,4 +124,21 @@ a:hover {
 }
 .dashboard {
     margin-top: 6px;
+}
+.nav-auth-btn {
+       
+    padding: 5px;
+    height: 40px;
+    width: 92px;
+    background-color: transparent;
+    border: 2px solid #fff;
+    color: #fff;
+    font-size: .9rem;
+    font-weight: 600;
+    transition: all 150ms ease-in-out;
+}
+.nav-auth-btn:hover {
+    background-color: #fff;
+    transform: scale(.95);
+    color: #000;
 }

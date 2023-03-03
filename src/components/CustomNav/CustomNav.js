@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-
+import { Link } from 'react-router-dom';
 import { Paper, Avatar } from '@mui/material';
 import './custom.css'
 import axios from 'axios';
@@ -11,16 +11,18 @@ const CustomNav = () => {
     const [isOptionsOpen, setIsOptionsOpen] = useState(false);
     const [results, setResults] = useState([]);
     
+
     function handleOptionsClick() {
         setIsOptionsOpen(!isOptionsOpen);
     }
 
+
     const fetchData = async () => {
-        const searchURL = `https://backend-course-app-production-1670.up.railway.app/course/search?q=${text}`
+        const searchURL = `https://backend-course-app-production-1670.up.railway.app/test/search?q=${text}`
         const response = await axios.get(searchURL);
         setResults(response.data);
     }
-
+    console.log(results);
     useEffect(() => {
         if (text.length > 2) {
             setResultOpen(true);
@@ -29,13 +31,14 @@ const CustomNav = () => {
         }
         fetchData();
     }, [text])
+
     return (
         <>
             <header>
                 <nav>
                     <ul>
                         <li>
-                            <p className = "site-heading-title" >Hustlers University</p>
+                            <p className = "site-heading-title" >Major Project Mihir</p>
                         </li>
                         <li className='search-dept'>
                             <input autoComplete='false' name = "search" onChange = {(e) => setText(e.target.value)} className='search-inp' type="text" placeholder='type to search'/>
@@ -63,30 +66,53 @@ const CustomNav = () => {
                                 </div>
                             }
                         </li>
-                        <li>
-                            <ShoppingCartIcon />
-                        </li>
-                        <li className = "option-menu">
-                            <MoreVertIcon onClick = {handleOptionsClick}/>
-                            {
-                                isOptionsOpen 
-                                &&
-                                <div className="user-options-result">
-                                    <Paper className = "paper-styling-options" sx = {{height: "25vh", width: "14vw"}}>
-                                        <div className="option-items-container">
-                                            <div className="avatar-and-username">
-                                                <Avatar className = "nav-avatar" src = "https://i.scdn.co/image/ab67616d0000b27324873164c69c38a8fe2d9730"/>
-                                                <span className='nav-username'>Mihir</span>
-                                            </div>
-                                            <p className = "options dashboard">Dashboard</p>
-                                            <p className = "options">Update Account</p>
-                                            <p className = "options">Delete Account</p>
-                                        </div>
-                                    </Paper>
+                        {
+                         !JSON.parse(localStorage.getItem("token"))  ? (
+                            <>
+                                <li>
+                                    <Link to = "/login">
+                                        <button className='nav-auth-btn'>
+                                            Login
+                                        </button>
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to = "/register">
+                                        <button className='nav-auth-btn'>
+                                            Sign Up
+                                        </button>
+                                    </Link>
+                                </li>
+                            </>
+                         ) : (
+                            <>
+                                <li>
+                                    <ShoppingCartIcon />
+                                </li>
+                                <li className = "option-menu">
+                                    <MoreVertIcon onClick = {handleOptionsClick}/>
+                                    {
+                                        isOptionsOpen 
+                                        &&
+                                        <div className="user-options-result">
+                                            <Paper className = "paper-styling-options" sx = {{height: "25vh", width: "14vw"}}>
+                                                <div className="option-items-container">
+                                                    <div className="avatar-and-username">
+                                                        <Avatar className = "nav-avatar" src = "https://i.scdn.co/image/ab67616d0000b27324873164c69c38a8fe2d9730"/>
+                                                        <span className='nav-username'>Mihir</span>
+                                                    </div>
+                                                    <p className = "options dashboard">Dashboard</p>
+                                                    <p className = "options">Update Account</p>
+                                                    <p className = "options">Delete Account</p>
+                                                </div>
+                                            </Paper>
 
-                                </div>
-                            }
-                        </li>
+                                        </div>
+                                    }
+                                </li>
+                            </>
+                         )
+                        }
                     </ul>
                 </nav>
             </header>

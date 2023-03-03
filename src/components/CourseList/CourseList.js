@@ -17,7 +17,7 @@ const CourseList = () => {
   const url = document.URL;
   const gettingCourseId = url.split('/')[4];
   const fetchData = async () => {
-    const url = `https://backend-course-app-production-1670.up.railway.app/course/${gettingCourseId}`
+    const url = `https://backend-course-app-production-1670.up.railway.app/test/${gettingCourseId}`
     const result = await axios.get(url, {
       withCredentials: false,
       headers: {
@@ -25,13 +25,13 @@ const CourseList = () => {
       }
     });
 
-    setCourseDetails(result.data.rest);
+    setCourseDetails(result.data);
     setLoading(false);
     if (result.data.isPurchased != null) {
       setIsPurchased(true);
     }
   }
-  
+  console.log(courseDetails);
   console.log("courseDetails", courseDetails);
   
   useEffect(() => {
