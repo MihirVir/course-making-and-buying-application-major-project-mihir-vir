@@ -2,7 +2,8 @@ import React, {useEffect, useState} from 'react'
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Link } from 'react-router-dom';
-import { Paper, Avatar } from '@mui/material';
+import { Paper, Avatar, duration } from '@mui/material';
+import {easeInOut, motion} from 'framer-motion'
 import './custom.css'
 import axios from 'axios';
 const CustomNav = () => {
@@ -38,7 +39,9 @@ const CustomNav = () => {
                 <nav>
                     <ul>
                         <li>
-                            <p className = "site-heading-title" >Major Project Mihir</p>
+                            <p className = "site-heading-title">
+                                Major Project Mihir
+                            </p>
                         </li>
                         <li className='search-dept'>
                             <input autoComplete='false' name = "search" onChange = {(e) => setText(e.target.value)} className='search-inp' type="text" placeholder='type to search'/>

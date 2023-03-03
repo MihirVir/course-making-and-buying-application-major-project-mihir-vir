@@ -1,18 +1,33 @@
 import React from 'react'
+import {easeInOut, motion} from 'framer-motion';
 import './newtestpage.css'
 const NewTestPage = () => {
   return (
     <>
         <section className="home-enter-img-svg">
             <div className="home-enter-container">
-                <img className = "new-test-page-img" src="https://emantav.in/wp-content/uploads/2021/04/Pte-course-img.png" alt="" />
+                <motion.img
+                    initial ={{opacity: 0}}
+                    animate ={{opacity: 1}}
+                    transition={{duration: .8, easeInOut}}
+                    className = "new-test-page-img" src="https://emantav.in/wp-content/uploads/2021/04/Pte-course-img.png" alt="" />
                 <div className="home-enter-details">
-                    <h2 className='home-enter-motivation'>
+                    <motion.h2 
+                        initial ={{opacity: 0}}
+                        animate ={{opacity: 1}}
+                        className='home-enter-motivation'
+                        transition={{delay: 1,duration: 1, easeInOut}}
+                    >
                         Ready To Upskill?
-                    </h2>
-                    <span className='home-enter-para'>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat est esse iusto fugit inventore ullam laboriosam corporis explicabo blanditiis voluptatum.
-                    </span>
+                    </motion.h2>
+                    <motion.span 
+                        initial = {{opacity: 0}}
+                        animate={{opacity: 1}}
+                        transition={{delay: 2, duration: 1, easeInOut}}
+                        className='home-enter-para'
+                    >
+                        Learn at the comfort of your own home
+                    </motion.span>
                 </div>
             </div>
         </section>

@@ -23,16 +23,17 @@
 }
 .home-enter-motivation {
     width: 100%;
-    font-size: 2.2rem;
+    font-size: 3rem;
 }
 .home-enter-details {
-    width: 28%;
+    width: 38%;
+    padding: 20px;
 }
 .home-enter-para {
     width: 60%;
     font-weight: 300;
     text-align: center;
-    font-size: 0.9rem;
+    font-size: 1.2rem;
 }
 @keyframes suii {
     0% {
