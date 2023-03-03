@@ -107,7 +107,7 @@ const NewCourse = ({accessToken}) => {
                         </Paper>
                         <Paper className = "paper-bg" sx = {{backgroundColor: "rgb(28,29,31)",  transition: "all 200ms ease-in-out;"}} variant='outlined' elevation={24}>
                             <div className="items-container">
-                              <img src="https://images.genius.com/16685aa5246f25cbb660782ad7a32735.1000x1000x1.png" alt="" />
+                              <img loading='lazy' src="https://images.genius.com/16685aa5246f25cbb660782ad7a32735.1000x1000x1.png" alt="" />
                               <div className="name-and-price">
                                 <span className="name">
                                     test
