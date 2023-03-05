@@ -46,3 +46,26 @@
         transform: translateY(5px);
     }
 }
+
+@media screen and (max-width: 900px){
+    .home-enter-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 1em;
+    }
+    .home-enter-motivation {
+        font-size: 1.2rem;    
+    }
+    .home-enter-para {
+        font-size: .9rem;
+    }
+    .home-enter-details {
+        width: 60%;
+    }
+    .new-test-page-img {
+        height: 400px;
+        width: 80%;
+        object-fit: contain;
+    }
+}

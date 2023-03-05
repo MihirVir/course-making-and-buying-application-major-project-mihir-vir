@@ -24,13 +24,21 @@ const Login = () => {
             password: state.password
         }
 
-        const res = await axios.post(loginUrl, userDetails)
+        const res = await axios.post(loginUrl, userDetails, {
+            headers: {
+                "Access-Control-Allow-Origin": "http://localhost:3000"
+            }
+        })
+        if (res.status === 404) {
+            setError(true);
+        }
         setUser(res.data.token);
         localStorage.setItem("token", JSON.stringify(res.data.token));
         if(res.status === 200) {
             // saveAccessToken(res.data.token);
             navigate('/');
         }
+
     }
 
     const handleChange = (e) => {
@@ -44,6 +52,9 @@ const Login = () => {
     }
 
     useEffect(() => {
+        if (success) {
+            toast.success("Successfully logged in")
+        }
         if (error) {
             toast.error("Error: User not found or Please Check Your Email and Password")
         }
@@ -64,7 +75,7 @@ const Login = () => {
             <div className="login-container">
                 <form onSubmit={handleSubmit} className = "login-form-style">
                     <h2 className = "form-heading">
-                        Login Account
+                        Login
                     </h2>
                     <TextField
                         onChange={handleChange}
@@ -82,11 +93,11 @@ const Login = () => {
                         className = "text-view"
                     />
 
-                    <button className = "submit-btn">
+                    <button type = "submit" className = "submit-btn">
                         Login
                     </button>
 
-                    <p onClick = {() => {navigate('/')}}>
+                    <p onClick = {() => {navigate('/register')}}>
                         Don't have an account? click to register
                     </p>
                 </form>

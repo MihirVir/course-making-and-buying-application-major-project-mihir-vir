@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Paper, Avatar, duration } from '@mui/material';
 import {easeInOut, motion} from 'framer-motion'
 import './custom.css'
@@ -11,8 +11,7 @@ const CustomNav = () => {
     const [isResultOpen, setResultOpen] = useState(false);
     const [isOptionsOpen, setIsOptionsOpen] = useState(false);
     const [results, setResults] = useState([]);
-    
-
+    const navigate = useNavigate();
     function handleOptionsClick() {
         setIsOptionsOpen(!isOptionsOpen);
     }
@@ -22,6 +21,13 @@ const CustomNav = () => {
         const searchURL = `https://backend-course-app-production-1670.up.railway.app/test/search?q=${text}`
         const response = await axios.get(searchURL);
         setResults(response.data);
+
+        
+    }
+
+    const handleLogout = () => {
+        localStorage.removeItem("token")
+        navigate("/login");
     }
     console.log(results);
     useEffect(() => {
@@ -44,7 +50,9 @@ const CustomNav = () => {
                             </p>
                         </li>
                         <li className='search-dept'>
-                            <input autoComplete='false' name = "search" onChange = {(e) => setText(e.target.value)} className='search-inp' type="text" placeholder='type to search'/>
+                            <form className='search-text-form'>
+                                <input autoComplete='false' name = "search" onChange = {(e) => setText(e.target.value)} className='search-inp' type="text" placeholder='type to search'/>
+                            </form>
                             {
                                 isResultOpen 
                                 &&
@@ -74,9 +82,14 @@ const CustomNav = () => {
                             <>
                                 <li>
                                     <Link to = "/login">
-                                        <button className='nav-auth-btn'>
+                                        <motion.button
+                                            initial={{opacity: 0}}
+                                            animate={{opacity: 1}}
+                                            transition={{duration: 1, easeInOut}}
+                                            className='nav-auth-btn'
+                                        >
                                             Login
-                                        </button>
+                                        </motion.button>
                                     </Link>
                                 </li>
                                 <li>
@@ -90,19 +103,29 @@ const CustomNav = () => {
                          ) : (
                             <>
                                 <li>
-                                    <ShoppingCartIcon />
+                                    <motion.button
+                                        initial={{opacity: 0}}
+                                        animate={{opacity: 1}}
+                                        transition={{duration: 1, easeInOut}}
+                                        onClick={handleLogout}
+                                        className =  "nav-auth-btn"
+                                    >
+                                        Logout
+                                    </motion.button>
                                 </li>
+                                
                                 <li className = "option-menu">
                                     <MoreVertIcon onClick = {handleOptionsClick}/>
                                     {
                                         isOptionsOpen 
                                         &&
                                         <div className="user-options-result">
-                                            <Paper className = "paper-styling-options" sx = {{height: "25vh", width: "14vw"}}>
+                                            <Paper className = "paper-styling-options" sx = {{height: "25vh", width: "14vw"}}  >
                                                 <div className="option-items-container">
                                                     <div className="avatar-and-username">
                                                         <Avatar className = "nav-avatar" src = "https://i.scdn.co/image/ab67616d0000b27324873164c69c38a8fe2d9730"/>
                                                         <span className='nav-username'>Mihir</span>
+                                                        <ShoppingCartIcon />
                                                     </div>
                                                     <p className = "options dashboard">Dashboard</p>
                                                     <p className = "options">Update Account</p>

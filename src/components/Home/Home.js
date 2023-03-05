@@ -7,7 +7,8 @@ import NewCourse from './fetchCourses/NewCourse'
 import NewTestPage from './NewTestPage/NewTestPage'
 import Navbar from '../NavBar/Navbar'
 import CustomNav from '../CustomNav/CustomNav'
-
+import ContactPage from './ContactPage/ContactPage'
+import Footer from '../Footer/Footer'
 const Home = () => {
   const navigate = useNavigate();
   const [resultData, setResultData] = useState([]);
@@ -36,6 +37,8 @@ const Home = () => {
       <section className='home-section'>
         <NewTestPage />
         <NewCourse accessToken = {accessToken}/>
+        <ContactPage />
+        <Footer />
       </section>
     </>
     
