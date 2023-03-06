@@ -25,8 +25,6 @@ const CustomNav = () => {
         const searchURL = `https://backend-course-app-production-1670.up.railway.app/test/search?q=${search}`
         const response = await axios.get(searchURL);
         setResults(response.data);
-
-        
     }
 
     const handleLogout = () => {
@@ -42,8 +40,10 @@ const CustomNav = () => {
         }
         fetchData();
     }, [search])
+
     const handleSearch = () =>{
         navigate("/search")
+        console.log("navigation start");
     }
     return (
         <>
