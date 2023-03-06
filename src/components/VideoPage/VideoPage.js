@@ -51,7 +51,7 @@ const VideoPage = () => {
     togglePlay();
   }
   
-
+  // new commit
   // view modes
   
   //theater mode
