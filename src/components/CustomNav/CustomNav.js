@@ -42,8 +42,7 @@ const CustomNav = () => {
         }
         fetchData();
     }, [search])
-    const handleSearch = (e) =>{
-        e.preventDefault();
+    const handleSearch = () =>{
         navigate("/search")
     }
     return (

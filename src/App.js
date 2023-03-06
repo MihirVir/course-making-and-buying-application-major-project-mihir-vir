@@ -29,6 +29,7 @@ function App() {
             <Route exact path = "/" element = {<Home />}></Route>
             <Route exact path = "/course/:id" element = {<CourseList />}></Route>
             <Route exact path = "/custom" element = {<CustomNav />}></Route>
+            {/* searchroutes */}
             <Route exact path = "/search" element = {<Search />}></Route>
             <Route exact path = "/course/:id/:videoIndex" element = {<VideoPage/>}></Route>
           </Routes>
