@@ -4,10 +4,14 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Link, useNavigate } from 'react-router-dom';
 import { Paper, Avatar, duration } from '@mui/material';
 import {easeInOut, motion} from 'framer-motion'
+import { useSearchParams } from 'react-router-dom';
+import {useSelector, useDispatch, Provider} from 'react-redux'
+import {selectSearch, setSearch} from '../../store'
 import './custom.css'
 import axios from 'axios';
 const CustomNav = () => {
-    const [text, setText] = useState("");
+    const search = useSelector(selectSearch);
+    const dispatch = useDispatch();
     const [isResultOpen, setResultOpen] = useState(false);
     const [isOptionsOpen, setIsOptionsOpen] = useState(false);
     const [results, setResults] = useState([]);
@@ -18,7 +22,7 @@ const CustomNav = () => {
 
 
     const fetchData = async () => {
-        const searchURL = `https://backend-course-app-production-1670.up.railway.app/test/search?q=${text}`
+        const searchURL = `https://backend-course-app-production-1670.up.railway.app/test/search?q=${search}`
         const response = await axios.get(searchURL);
         setResults(response.data);
 
@@ -31,14 +35,17 @@ const CustomNav = () => {
     }
     console.log(results);
     useEffect(() => {
-        if (text.length > 2) {
+        if (search.length > 2) {
             setResultOpen(true);
         } else {
             setResultOpen(false)
         }
         fetchData();
-    }, [text])
-
+    }, [search])
+    const handleSearch = (e) =>{
+        e.preventDefault();
+        navigate("/search")
+    }
     return (
         <>
             <header>
@@ -50,8 +57,8 @@ const CustomNav = () => {
                             </p>
                         </li>
                         <li className='search-dept'>
-                            <form className='search-text-form'>
-                                <input autoComplete='false' name = "search" onChange = {(e) => setText(e.target.value)} className='search-inp' type="text" placeholder='type to search'/>
+                            <form onSubmit={handleSearch} className='search-text-form'>
+                                <input  value = {search} autoComplete='false' name = "search" onChange = {(e) => dispatch(setSearch(e.target.value))} className='search-inp' type="text" placeholder='type to search'/>
                             </form>
                             {
                                 isResultOpen 
