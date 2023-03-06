@@ -59,6 +59,7 @@ const CustomNav = () => {
                         <li className='search-dept'>
                             <form onSubmit={handleSearch} className='search-text-form'>
                                 <input  value = {search} autoComplete='false' name = "search" onChange = {(e) => dispatch(setSearch(e.target.value))} className='search-inp' type="text" placeholder='type to search'/>
+                                <button>Submit</button>
                             </form>
                             {
                                 isResultOpen 
