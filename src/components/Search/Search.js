@@ -1,8 +1,9 @@
 import React, {useRef, useEffect, useState} from 'react'
 import axios from 'axios';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import './search.css'
 import { RadioGroup, Radio, FormControlLabel } from '@mui/material';
-
+import {useNavigate} from 'react-router-dom'
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
@@ -16,12 +17,15 @@ const Search = () => {
     const dispatch = useDispatch();
     const [filterValue, setFilterValue] = useState("");
     const [input, setInput] = useState("");
+    const navigate = useNavigate();
     const fetchSearchData = async () => {
         const searchURL = `https://backend-course-app-production-1670.up.railway.app/test/search?q=${searchValue}`
         const response = await axios.get(searchURL);
         setResults(response.data);
     }
-    
+    const handleBackAction = () => {
+        navigate("/");
+    }    
     useEffect(() => {
         setSearchVal(searchValue)
         fetchSearchData();
@@ -45,6 +49,7 @@ const Search = () => {
        <section className='search-result-section'>
             <div className="search-section-container">
                 <div className="search-filters">
+                    <span><ArrowBackIcon onClick = {handleBackAction}/></span>
                     <h2 className = "section-title-search">Search</h2>
                     <div className="search-input-and-filter-container">
                         <input  className = "search-result-section-input" value = {searchValue} name = "search" onChange = {(e) =>  {dispatch(setSearch(e.target.value)); setInput(e.target.value)}} type="text" placeholder="enter search value"/>
@@ -73,7 +78,7 @@ const Search = () => {
                             return (
                             
                                 <div key = {item._id} className="result-section-container">    
-                                    <img className = "result-section-img" src="https://robertmarshall.dev/static/965c61c79da9aefaaf6ed51af84d9340/53c7e/testing-images-in-react-with-jest.avif" alt="" />
+                                    <img loading='lazy' className = "result-section-img" src={`https://backend-course-app-production-1670.up.railway.app/templates/${item.template}`} alt="" />
                                     <div className="result-section-course-info-container">
                                         <div className="basic-course-info">
                                             <span>{item.courseName}</span>

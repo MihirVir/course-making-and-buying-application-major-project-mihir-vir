@@ -91,20 +91,12 @@ video {
     display: none;
 }
 
-.volume-muted-icon, .volume-low-icon, .volume-high-icon {
+
+
+.volume-high-icon,
+.volume-low-icon,
+.volume-off-icon {
     display: none;
-}
-.video-container[data-volume-level="low"] .volume-low-icon {
-    display: block;
-    z-index: 101;
-}
-.video-container[data-volume-level="high"] .volume-high-icon {
-    display: block;
-    z-index: 101;
-}
-.video-container[data-volume-level="muted"] .volume-muted-icon {
-    display: block;
-    z-index: 101;
 }
 .volume-container {
     display: flex;
@@ -122,4 +114,21 @@ video {
 .volume-slider :focus-within {
     width: 100px;
     transform: scale(1);
+}
+.video-container[data-volume-level="off"] .volume-off-icon {
+    display: inline;
+}
+.video-container[data-volume-level="high"] .volume-high-icon {
+    display: inline;
+}
+.video-container[data-volume-level="low"] .volume-low-icon {
+    display: inline;
+}
+.volume-container {
+    height: 20px;
+}
+.duration-container {
+    display: flex;
+    align-items: center;
+
 }
