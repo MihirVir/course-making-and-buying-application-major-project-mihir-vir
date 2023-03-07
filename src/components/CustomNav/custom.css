@@ -36,13 +36,22 @@ nav>ul>li {
     padding: 10px;
     outline: none;
     border: none;
-    border-radius: 1%;
     width: 100%;
     font-weight: 700;
     font-size: 1rem;
 }
 .search-text-form {
     width: 100%;
+    display: flex;
+}
+.search-text-form > button {
+    height: 100%;
+    padding: 10px;
+    background-color: transparent;
+    border: 2px solid white;
+    background-color: white;
+    outline: none;
+    color: black;
 }
 .search-dept {
     position: relative;
