@@ -266,6 +266,15 @@ const VideoPage = () => {
           <div onClick={handleVideoOnClick} onDoubleClick = {handleDoubleClick} className="absolute-right-div-for-double-click"></div>
           <div onClick = {handleVideoOnClick} onDoubleClick = {handlePrevDoubleClick} className="absolute-left-div-for-double-click"></div>
         </div>
+        <div className="docs-section">
+          <h2>Video Docs</h2>
+          <ol>
+            <li>right section of video player double tap skips 5 seconds </li>
+            <li>left sections rewinds 5 seconds </li>
+            <li>single tap pauses / plays the video</li>
+            <li>volume on click mutes and unmutes</li>
+          </ol>
+        </div>
     </section>
   )
 }

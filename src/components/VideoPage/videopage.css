@@ -167,7 +167,9 @@ video {
 .timeline-controls:hover .timeline{
     height: 100%;
 }
-
+.docs-section {
+    padding: 25px;
+}
 .timeline {
     transition: all 200ms ease-in-out;
     background-color: rgba(100, 100, 100, .5);
