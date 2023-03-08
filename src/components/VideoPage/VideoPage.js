@@ -1,12 +1,17 @@
-import React, {useState, useRef} from 'react'
+import React, {useState, useRef, useEffect} from 'react'
 import reaching from '../../reaching2/sui.mp4'
 import PlayArrowIcon from '@mui/icons-material/PlayArrow'; // play icon
 import PauseIcon from '@mui/icons-material/Pause'; // Pause Icon
+import VideoNext from "./VideoNext/VideoNext"
+import ListIcon from '@mui/icons-material/List';
 import './videopage.css'
+import axios from 'axios';
 const VideoPage = () => {
   const [isPlay, setIsPlay] = useState(false);
+  const [data, setData] = useState();
   const [isFullScreen, setIsFullScreen] = useState(true);
   const [isScrubbing, setIsScrubbing] = useState(false);
+  const [isTitleList, setIsTitleList] = useState(false);
   const containerRef = useRef(null);
   const videoRef = useRef();
   const theaterRef = useRef();
@@ -15,9 +20,24 @@ const VideoPage = () => {
   const playBackBtnRef = useRef(); 
   const totalTimeRef = useRef();
   const muteBtn = useRef();
-  const [curr, setCurr] = useState("");
   const sliderRef = useRef();
   const timelineContainer = useRef();
+  const len = 1;
+  const courseId = document.URL.split("/")[4];
+  const videoIdx = document.URL.split("/")[5];
+
+
+
+  const fetchData = async () => {
+    const url = `https://backend-course-app-production-1670.up.railway.app/video/${courseId}/${videoIdx}`
+    const results = await axios.get(url, {
+      headers: {
+        "Authorization": `Bearer ${JSON.parse(localStorage.getItem("token"))}`
+      }
+    })
+    setData(results.data);
+  }
+
   const playPauseHandler = () => {
     setIsPlay(!isPlay)
     togglePlay();
@@ -31,8 +51,12 @@ const VideoPage = () => {
       console.log(err);
     }
   }
+  useEffect(() => {
+    fetchData();
+  }, [])
+  console.log(data);
 
-  
+
   function togglePlay() {
     if (isPlay === true) {
       containerRef.current.classList.remove("paused");
@@ -197,85 +221,114 @@ const VideoPage = () => {
       handleTimeUpdate(e);
     }
   })
+
+  const handleTopicList = () => {
+    setIsTitleList(!isTitleList);
+  }
+
   return (
-    <section className="video-page-section" onContextMenu={handleContext} onKeyDown={handleKeyDown}>
-      <h2>
-        Working on it
-      </h2>
-        <div ref = {containerRef} className="video-container pause" data-volume-level="high">
-          <div className="video-controls-container">
-            <div onMouseMove={handleMouseMove} ref = {timelineContainer} onMouseDown={handleScrubbing} className="timeline-controls">
-              <div className="timeline">
-                <div className="thumb-indicator"></div>
-              </div>
-            </div>
-            <div className="controls">
-
-              <button onClick = {playPauseHandler} className="play-pause-btn">
-                <PlayArrowIcon className = "play-icon"/>
-                <PauseIcon className='pause-icon'/>
-              </button>
-              <div className="volume-container">
-                <button onClick = {handleMuteBtnClick} className="mute-btn" ref = {muteBtn}>
-                    <svg className="volume-high-icon" viewBox="0 0 24 24">
-                      <path fill="currentColor" d="M14,3.23V5.29C16.89,6.15 19,8.83 19,12C19,15.17 16.89,17.84 14,18.7V20.77C18,19.86 21,16.28 21,12C21,7.72 18,4.14 14,3.23M16.5,12C16.5,10.23 15.5,8.71 14,7.97V16C15.5,15.29 16.5,13.76 16.5,12M3,9V15H7L12,20V4L7,9H3Z" />
-                    </svg>
-                    <svg  className="volume-low-icon" viewBox="0 0 24 24">
-                      <path fill="currentColor" d="M5,9V15H9L14,20V4L9,9M18.5,12C18.5,10.23 17.5,8.71 16,7.97V16C17.5,15.29 18.5,13.76 18.5,12Z" />
-                    </svg>
-                    <svg className="volume-muted-icon" viewBox="0 0 24 24">
-                      <path fill="currentColor" d="M12,4L9.91,6.09L12,8.18M4.27,3L3,4.27L7.73,9H3V15H7L12,20V13.27L16.25,17.53C15.58,18.04 14.83,18.46 14,18.7V20.77C15.38,20.45 16.63,19.82 17.68,18.96L19.73,21L21,19.73L12,10.73M19,12C19,12.94 18.8,13.82 18.46,14.64L19.97,16.15C20.62,14.91 21,13.5 21,12C21,7.72 18,4.14 14,3.23V5.29C16.89,6.15 19,8.83 19,12M16.5,12C16.5,10.23 15.5,8.71 14,7.97V10.18L16.45,12.63C16.5,12.43 16.5,12.21 16.5,12Z" />
-                    </svg> 
-              
-                </button>
-                <input onInput={handleOnInputSlider} ref = {sliderRef} className = "volume-slider" type="range" min = {0} max = {1} step="any"/>
-              </div>
-              <div className="duration-container">
-                <div ref = {currentTimeRef} className="current-time">
-                  0:00
+    <>
+    {
+      videoIdx > len ? (
+        <>
+          <p>Error</p>
+        </>
+      ) : (
+        <>
+          <section className="video-page-section" onContextMenu={handleContext} onKeyDown={handleKeyDown}>
+            <div className="information-video-page-section">
+              <h2>
+                {data?.courseName}
+              </h2>
+              <p>{data?.title}</p>
+              <ListIcon onClick={handleTopicList} />
+              { isTitleList && (
+                <>
+                <div className="title-arr-container">
+                  <ul className = "video-player-title-list">
+                    {data?.titleArr.map((item, idx) => {
+                      return (
+                        <>
+                          <li key = {idx}>{item}</li>
+                        </>
+                      )
+                    })}
+                  </ul>
                 </div>
-                /
-                <div ref = {totalTimeRef}  className="total-time">
-                  10:00
-                </div>
-              </div>
-              <button tooltip = "playback speed" onClick = {changePlayBackSpeed} ref = {playBackBtnRef} style={{fontSize: ".9rem",minWidth: "40px", backgroundColor: "white", color: "black", paddingLeft: "15px", textAlign: "center", paddingRight: "15px", height: "32px", borderRadius: "10px", display: "flex", justifyContent: "center", alignItems: "center"}} className="speed-btn wide-btn">
-                1x
-              </button>
-              <button onClick={handleTheaterOnClick} ref = {theaterRef} className="theater-btn">
-                  <svg className="tall" viewBox="0 0 24 24">
-                    <path fill="currentColor" d="M19 6H5c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 10H5V8h14v8z"/>
-                  </svg>
-                  <svg className="wide" viewBox="0 0 24 24">
-                    <path fill="currentColor" d="M19 7H5c-1.1 0-2 .9-2 2v6c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zm0 8H5V9h14v6z"/>
-                  </svg> 
-              </button>
-              <button onClick = {handleFullScreenMode} ref = {fullScreenRef}  className="full-screen-btn">
-                  <svg className="open" viewBox="0 0 24 24">
-                    <path fill="currentColor" d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
-                  </svg>
-                  <svg className="close" viewBox="0 0 24 24">
-                    <path fill="currentColor" d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/>
-                  </svg>
-              </button>
-              
+                </>
+              )}
             </div>
-          </div>
-          <video onTimeUpdate={handleTimeUpdate} onLoadedData={handleDurationLoad} autoPlay onVolumeChange={handleOnVolumeChange} ref = {videoRef} onClick = {handleVideoOnClick}  className = "course-video-player" src={reaching} controlsList="nodownload"></video>
+              <div ref = {containerRef} className="video-container pause" data-volume-level="high">
+                <div className="video-controls-container">
+                  <div onMouseMove={handleMouseMove} ref = {timelineContainer} onMouseDown={handleScrubbing} className="timeline-controls">
+                    <div className="timeline">
+                      <div className="thumb-indicator"></div>
+                    </div>
+                  </div>
+                  <div className="controls">
 
-          <div onClick={handleVideoOnClick} onDoubleClick = {handleDoubleClick} className="absolute-right-div-for-double-click"></div>
-          <div onClick = {handleVideoOnClick} onDoubleClick = {handlePrevDoubleClick} className="absolute-left-div-for-double-click"></div>
-        </div>
-        <div className="docs-section">
-          <h2>Video Docs</h2>
-          <ol>
-            <li>right section of video player double tap skips 5 seconds </li>
-            <li>left sections rewinds 5 seconds </li>
-            <li>single tap pauses / plays the video</li>
-            <li>volume on click mutes and unmutes</li>
-          </ol>
-        </div>
-    </section>
+                    <button onClick = {playPauseHandler} className="play-pause-btn">
+                      <PlayArrowIcon className = "play-icon"/>
+                      <PauseIcon className='pause-icon'/>
+                    </button>
+                    <div className="volume-container">
+                      <button onClick = {handleMuteBtnClick} className="mute-btn" ref = {muteBtn}>
+                          <svg className="volume-high-icon" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M14,3.23V5.29C16.89,6.15 19,8.83 19,12C19,15.17 16.89,17.84 14,18.7V20.77C18,19.86 21,16.28 21,12C21,7.72 18,4.14 14,3.23M16.5,12C16.5,10.23 15.5,8.71 14,7.97V16C15.5,15.29 16.5,13.76 16.5,12M3,9V15H7L12,20V4L7,9H3Z" />
+                          </svg>
+                          <svg  className="volume-low-icon" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M5,9V15H9L14,20V4L9,9M18.5,12C18.5,10.23 17.5,8.71 16,7.97V16C17.5,15.29 18.5,13.76 18.5,12Z" />
+                          </svg>
+                          <svg className="volume-muted-icon" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M12,4L9.91,6.09L12,8.18M4.27,3L3,4.27L7.73,9H3V15H7L12,20V13.27L16.25,17.53C15.58,18.04 14.83,18.46 14,18.7V20.77C15.38,20.45 16.63,19.82 17.68,18.96L19.73,21L21,19.73L12,10.73M19,12C19,12.94 18.8,13.82 18.46,14.64L19.97,16.15C20.62,14.91 21,13.5 21,12C21,7.72 18,4.14 14,3.23V5.29C16.89,6.15 19,8.83 19,12M16.5,12C16.5,10.23 15.5,8.71 14,7.97V10.18L16.45,12.63C16.5,12.43 16.5,12.21 16.5,12Z" />
+                          </svg> 
+                    
+                      </button>
+                      <input onInput={handleOnInputSlider} ref = {sliderRef} className = "volume-slider" type="range" min = {0} max = {1} step="any"/>
+                    </div>
+                    <div className="duration-container">
+                      <div ref = {currentTimeRef} className="current-time">
+                        0:00
+                      </div>
+                      /
+                      <div ref = {totalTimeRef}  className="total-time">
+                        10:00
+                      </div>
+                    </div>
+                    <button tooltip = "playback speed" onClick = {changePlayBackSpeed} ref = {playBackBtnRef} style={{fontSize: ".9rem",minWidth: "40px", backgroundColor: "white", color: "black", paddingLeft: "15px", textAlign: "center", paddingRight: "15px", height: "32px", borderRadius: "10px", display: "flex", justifyContent: "center", alignItems: "center"}} className="speed-btn wide-btn">
+                      1x
+                    </button>
+                    <button onClick={handleTheaterOnClick} ref = {theaterRef} className="theater-btn">
+                        <svg className="tall" viewBox="0 0 24 24">
+                          <path fill="currentColor" d="M19 6H5c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 10H5V8h14v8z"/>
+                        </svg>
+                        <svg className="wide" viewBox="0 0 24 24">
+                          <path fill="currentColor" d="M19 7H5c-1.1 0-2 .9-2 2v6c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zm0 8H5V9h14v6z"/>
+                        </svg> 
+                    </button>
+                    <button onClick = {handleFullScreenMode} ref = {fullScreenRef}  className="full-screen-btn">
+                        <svg className="open" viewBox="0 0 24 24">
+                          <path fill="currentColor" d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+                        </svg>
+                        <svg className="close" viewBox="0 0 24 24">
+                          <path fill="currentColor" d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/>
+                        </svg>
+                    </button>
+                    
+                  </div>
+                </div>
+                <video onTimeUpdate={handleTimeUpdate} onLoadedData={handleDurationLoad} autoPlay onVolumeChange={handleOnVolumeChange} ref = {videoRef} onClick = {handleVideoOnClick}  className = "course-video-player" src={`https://backend-course-app-production-1670.up.railway.app/uploads/${data?.name}`} controlsList="nodownload"></video>
+
+                <div onClick={handleVideoOnClick} onDoubleClick = {handleDoubleClick} className="absolute-right-div-for-double-click"></div>
+                <div onClick = {handleVideoOnClick} onDoubleClick = {handlePrevDoubleClick} className="absolute-left-div-for-double-click"></div>
+              </div>
+              
+          </section>
+          <VideoNext len = {len} courseId = {courseId} />
+        </>
+      )
+    }
+    </>
   )
 }
 
