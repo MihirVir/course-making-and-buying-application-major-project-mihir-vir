@@ -14,6 +14,7 @@ import CourseList from './components/CourseList/CourseList';
 import Home from './components/Home/Home';
 import VideoPage from './components/VideoPage/VideoPage';
 import { Provider } from 'react-redux';
+import Dashboard from './components/Dashboard/Dashboard';
 import { store } from './store';
 import Search from './components/Search/Search';
 function App() {
@@ -32,6 +33,7 @@ function App() {
             {/* searchroutes */}
             <Route exact path = "/search" element = {<Search />}></Route>
             <Route exact path = "/course/:id/:videoIndex" element = {<VideoPage/>}></Route>
+            <Route exact path = "/dashboard/:id" element = {<Dashboard />}></Route>
           </Routes>
       </Router>
     </Provider>

@@ -1,0 +1,14 @@
+.dashboard {
+    position: relative;
+    height: 400vh;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    background-color: antiquewhite;
+}
+.dashboard-information-container {
+    width: 88%;
+    display: flex;
+}
+

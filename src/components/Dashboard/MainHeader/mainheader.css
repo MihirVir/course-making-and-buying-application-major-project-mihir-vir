@@ -1,0 +1,22 @@
+.main-header-dashboard-section {
+    background-color: aqua;
+    width: 100%;
+}
+main {
+    width: 100%;
+    height: 6vh;
+    background-color: black;
+    color: white;
+    display: flex;
+    justify-content: center;
+}
+.dashboard-information-container {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+.dashboard-section-title {
+    font-size: 1.4rem;
+    font-weight: 900;
+    text-transform: uppercase;
+}
