@@ -24,7 +24,9 @@ const Home = () => {
   console.log(accessToken);
   
   useEffect(() => {
-  
+      if (!JSON.parse(localStorage.getItem("token"))) {
+        navigate("/login");
+      }
   }, [])
 
 
