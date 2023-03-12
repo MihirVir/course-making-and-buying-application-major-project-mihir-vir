@@ -15,23 +15,26 @@ const Login = () => {
     const [state, dispatch] = useReducer(registerReducer, INITIAL_STATE);
     const [error, setError] = useState(false)
     const [success, setSuccess] = useState(false)
-    
+    const [loading, setLoading] = useState(false);
     const handleSubmit = async (e) => {
         e.preventDefault();
         const loginUrl = 'https://backend-course-app-production-1670.up.railway.app/auth/login';
+        setLoading(true);
         const userDetails = {
             email: state.email,
             password: state.password
         }
-
         const res = await axios.post(loginUrl, userDetails, {
             headers: {
                 "Access-Control-Allow-Origin": "http://localhost:3000"
             }
         })
-        if (res.status === 404) {
+        if (res.status !== 200 || res.status !== 201) {
             setError(true);
         }
+        toast.success("successfully logged in ", {
+            position: toast.POSITION.TOP_RIGHT
+        })
         setUser(res.data.token);
         localStorage.setItem("token", JSON.stringify(res.data.token));
         if(res.status === 200) {
@@ -52,9 +55,6 @@ const Login = () => {
     }
 
     useEffect(() => {
-        if (success) {
-            toast.success("Successfully logged in")
-        }
         if (error) {
             toast.error("Error: User not found or Please Check Your Email and Password")
         }
@@ -62,17 +62,17 @@ const Login = () => {
   return (
     <>
         <section className = "login-section">
-            <ToastContainer />
             {
-                error ? (
+                error && (
                     <>
                         <Alert severity='error'>
                             User Not Found Please Check Your Email and Password
                         </Alert>
                     </>
-                ) : ""
+                )
             }
             <div className="login-container">
+            <ToastContainer />
                 <form onSubmit={handleSubmit} className = "login-form-style">
                     <h2 className = "form-heading">
                         Login
@@ -94,7 +94,7 @@ const Login = () => {
                     />
 
                     <button type = "submit" className = "submit-btn">
-                        Login
+                        {loading ? "Loading..." :  "Login"}
                     </button>
 
                     <p onClick = {() => {navigate('/register')}}>
