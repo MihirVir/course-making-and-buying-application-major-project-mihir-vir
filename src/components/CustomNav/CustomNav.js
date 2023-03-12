@@ -135,7 +135,11 @@ const CustomNav = () => {
                                                         <span className='nav-username'>Mihir</span>
                                                         <ShoppingCartIcon />
                                                     </div>
-                                                    <p className = "options">Dashboard</p>
+                                                    <p className = "options"> 
+                                                        <Link to = "/dashboard/users">
+                                                            Dashboard
+                                                        </Link>
+                                                    </p>
                                                     <p className = "options">Update Account</p>
                                                     <p className = "options">Delete Account</p>
                                                 </div>
