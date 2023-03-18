@@ -1,0 +1,50 @@
+.video-upload-dashboard-section {
+    width: 100%;
+    height: 92vh;
+    display: flex;
+    justify-content: center;
+}
+
+.video-upload-section-aligner  {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;   
+    background-color: aqua; 
+}
+.video-upload-section-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+.video-section-card-container {
+    width: 90%;
+    height: 90%;
+
+    margin-left: 5rem;
+}
+.course-information-video-container {
+    width: 100%;
+    align-items: center;
+    height: 22%;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+.video-dashboard-section-title {
+    font-size: 2rem;
+}
+.video-dashboard-course-template-img {
+    width: 15%;
+    height: 100px;
+    object-fit: contain;
+}
+.video-section-upload-form {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+}

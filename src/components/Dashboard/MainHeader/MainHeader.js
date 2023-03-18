@@ -3,16 +3,15 @@ import './mainheader.css'
 const MainHeader = ({title}) => {
   return (
     <> 
-        <main>
-            <div className="dashboard-information-container">
-                <div className="dashboard-aligner-container">
-                    <section>
-                        <h4 className = "dashboard-section-title">{title}</h4>
-                    </section>
+        <main className = "dashboard-main-header bg-slate-800">
+            <section className = "dashboard-section-header">
+                <div className="dashboard-header-container">
+                    <h2 className = "dashboard-header-container-title text-xl font-bold text-neutral-100">
+                        {title}
+                    </h2>
                 </div>
-            </div>
+            </section>
         </main>
-    
     </>
   )
 }

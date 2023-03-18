@@ -17,6 +17,7 @@ import { Provider } from 'react-redux';
 import Dashboard from './components/Dashboard/Dashboard';
 import { store } from './store';
 import Search from './components/Search/Search';
+import VideoUploader from './components/Dashboard/VideoUploader/VideoUploader';
 function App() {
   return (
     <>
@@ -34,6 +35,7 @@ function App() {
             <Route exact path = "/search" element = {<Search />}></Route>
             <Route exact path = "/course/:id/:videoIndex" element = {<VideoPage/>}></Route>
             <Route exact path = "/dashboard/:id" element = {<Dashboard />}></Route>
+            <Route exact path = "/dashboard/upload/:id" element = {<VideoUploader />} ></Route>
           </Routes>
       </Router>
     </Provider>

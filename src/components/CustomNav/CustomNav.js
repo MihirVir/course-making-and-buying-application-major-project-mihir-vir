@@ -29,8 +29,10 @@ const CustomNav = () => {
 
     const handleLogout = () => {
         localStorage.removeItem("token")
+        localStorage.removeItem("userId");
         navigate("/login");
     }
+
     console.log(results);
     useEffect(() => {
         if (search.length > 2) {
@@ -58,7 +60,7 @@ const CustomNav = () => {
                         </li>
                         <li className='search-dept'>
                             <form onSubmit={handleSearch} className='search-text-form'>
-                                <input  value = {search} autoComplete='false' name = "search" onChange = {(e) => dispatch(setSearch(e.target.value))} className='search-inp' type="text" placeholder='type to search'/>
+                                <input  value = {search} autoComplete='false' name = "search" onChange = {(e) => dispatch(setSearch(e.target.value))} className='search-inp' type="text" style = {{color:"black"}}placeholder='type to search'/>
                                 <button>Submit</button>
                             </form>
                             {
@@ -77,7 +79,7 @@ const CustomNav = () => {
                                                                 <a href={`/course/${item._id}`}>{item.courseName}</a>
                                                             </>
                                                         )
-                                                    }) : <a href="">No Results</a>
+                                                    }) : <a href="#">No Results</a>
                                                 }
                                             </div>
                                         </Paper>

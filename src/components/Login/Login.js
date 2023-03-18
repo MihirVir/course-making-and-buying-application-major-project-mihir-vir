@@ -13,12 +13,14 @@ const Login = () => {
     const navigate = useNavigate();
     const [user, setUser] = useState(null)
     const [state, dispatch] = useReducer(registerReducer, INITIAL_STATE);
+    const [result, setResult] = useState({});
     const [error, setError] = useState(false)
     const [success, setSuccess] = useState(false)
     const [loading, setLoading] = useState(false);
     const handleSubmit = async (e) => {
+        // backend-course-app-production-1670.up.railway.app
         e.preventDefault();
-        const loginUrl = 'https://backend-course-app-production-1670.up.railway.app/auth/login';
+        const loginUrl = 'http://localhost:8000/auth/login';
         setLoading(true);
         const userDetails = {
             email: state.email,
@@ -36,14 +38,16 @@ const Login = () => {
             position: toast.POSITION.TOP_RIGHT
         })
         setUser(res.data.token);
+        setResult(res.data.existingUser._id);
+        localStorage.setItem("userId", JSON.stringify(res.data.existingUser._id));
         localStorage.setItem("token", JSON.stringify(res.data.token));
+
         if(res.status === 200) {
             // saveAccessToken(res.data.token);
             navigate('/');
         }
 
     }
-
     const handleChange = (e) => {
         dispatch({
             type: "CHANGE_INPUT",

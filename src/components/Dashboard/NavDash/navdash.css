@@ -63,3 +63,18 @@
     width: 80%;
     text-transform: capitalize;
 }
+.dash-links {
+    text-align: center;
+    text-decoration: none;
+    height:5%;
+    padding: 20px;
+    width: 100%;
+}
+.dash-links:hover {
+    background-color: white;
+    text-decoration: none;
+    background-color: none;
+}
+.dash-links:hover li {
+    color: black;
+}

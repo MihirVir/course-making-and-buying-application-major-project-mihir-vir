@@ -6,6 +6,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import LeaderboardIcon from '@mui/icons-material/Leaderboard';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
+import { Link } from 'react-router-dom';
 import './navdash.css';
 const NavDash = () => {
     const [isFull, setIsFull] = useState(false);
@@ -26,50 +27,62 @@ const NavDash = () => {
                     </div>
                     <div className="nav-dash-list-items">
                         <ul className = "nav-dash-list-items-ul">
-                            <li>
-                                <UploadIcon style = {!isFull ? {width: "100%",display: "flex", justifyContent: "center", alignItems: "center"} : {}} /> 
-                                { isFull &&
-                                    <span>
-                                        Upload
-                                    </span> 
-                                }
-                            </li>
-                            <li>
-                                <EditIcon style = {!isFull ? {width: "100%",display: "flex", justifyContent: "center", alignItems: "center"} : {}} />
-                                {
-                                    isFull && (
-                                        <span>Edit</span>
-                                    )
-                                }
-                             </li>
-                            <li>
-                                <DeleteIcon style = {!isFull ? {width: "100%",display: "flex", justifyContent: "center", alignItems: "center"} : {}}/>
-                                {isFull && (
-                                    <span>Delete</span>
-                                )}
-                            </li>
-                            <li>
-                                <LeaderboardIcon style = {!isFull ? {width: "100%",display: "flex", justifyContent: "center", alignItems: "center"} : {}}/>
-                                {isFull && (
-                                    <span>Statistics</span>
-                                )}
-                            </li>
-                            <li>
-                                <PeopleAltIcon style = {!isFull ? {width: "100%",display: "flex", justifyContent: "center", alignItems: "center"} : {}}/>
-                                {
-                                    isFull && (
-                                        <span>Users</span>
-                                    )
-                                }
-                            </li>
-                            <li>
-                                <KeyboardReturnIcon style = {!isFull ? {width: "100%",display: "flex", justifyContent: "center", alignItems: "center"} : {}}/> 
-                                {
-                                    isFull && (
-                                        <span>returns</span>
-                                    )
-                                }
-                            </li>
+                            <Link reloadDocument className='dash-links' to = "/dashboard/upload">
+                                <li>
+                                    <UploadIcon style = {!isFull ? {width: "100%",display: "flex", justifyContent: "center", alignItems: "center"} : {}} /> 
+                                    { isFull &&
+                                            <span>
+                                                Upload
+                                            </span> 
+                                    }
+                                </li>
+                            </Link>
+                            <Link reloadDocument className = "dash-links" to = "/dashboard/edit">
+                                <li>
+                                    <EditIcon style = {!isFull ? {width: "100%",display: "flex", justifyContent: "center", alignItems: "center"} : {}} />
+                                    {
+                                        isFull && (
+                                                <span>Edit</span>
+                                                )
+                                            }
+                                </li>
+                            </Link>
+                            <Link reloadDocument className='dash-links' to = "/dashboard/delete">
+                                <li>
+                                    <DeleteIcon style = {!isFull ? {width: "100%",display: "flex", justifyContent: "center", alignItems: "center"} : {}}/>
+                                    {isFull && (
+                                            <span>Delete</span>
+                                    )}
+                                </li>
+                            </Link>
+                            <Link reloadDocument className='dash-links' to = "/dashboard/statistics">
+                                <li>
+                                    <LeaderboardIcon style = {!isFull ? {width: "100%",display: "flex", justifyContent: "center", alignItems: "center"} : {}}/>
+                                    {isFull && (
+                                            <span>Statistics</span>
+                                            )}
+                                </li>
+                            </Link>
+                            <Link reloadDocument className= "dash-links" to = "/dashboard/users">
+                                <li>
+                                    <PeopleAltIcon style = {!isFull ? {width: "100%",display: "flex", justifyContent: "center", alignItems: "center"} : {}}/>
+                                    {
+                                        isFull && (
+                                                <span>Users</span>
+                                                )
+                                            }
+                                </li>
+                            </Link>
+                            <Link className='dash-links' reloadDocument to = "/dashboard/returns">
+                                <li>
+                                    <KeyboardReturnIcon style = {!isFull ? {width: "100%",display: "flex", justifyContent: "center", alignItems: "center"} : {}}/> 
+                                    {
+                                        isFull && (
+                                                <span>returns</span>
+                                                )
+                                            }
+                                </li>
+                            </Link>
                         </ul>
                     </div>
                 </div>

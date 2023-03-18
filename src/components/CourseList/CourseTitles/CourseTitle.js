@@ -4,7 +4,7 @@ import './coursetitle.css'
 import axios from 'axios'
 const CourseTitle = ({courseDetails, isLoading}) => {
     const [restObject, setRestObject] = useState({});
-
+    
     return (
     <>
 
@@ -48,7 +48,7 @@ const CourseTitle = ({courseDetails, isLoading}) => {
                                 <ul className = "fixed-pos-li">
                                     <li>
                                         <h4>
-                                            $440                        
+                                            ${courseDetails.price}                        
                                         </h4>
                                     </li>
                                     <li className = "policy">10-Day Money-Back Guarantee</li>

@@ -17,7 +17,7 @@ const CourseList = () => {
   const url = document.URL;
   const gettingCourseId = url.split('/')[4];
   const fetchData = async () => {
-    const url = `https://backend-course-app-production-1670.up.railway.app/test/${gettingCourseId}`
+    const url = `http://localhost:8000/test/${gettingCourseId}`
     const result = await axios.get(url, {
       withCredentials: false,
       headers: {

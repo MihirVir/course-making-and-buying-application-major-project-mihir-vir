@@ -1,0 +1,52 @@
+.main-section-information {
+    width: 100%;
+    min-height: 92vh;
+    display: flex;
+    justify-content: flex-end;
+}
+.dashboard-section-information {
+    width: 93%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.dashboard-section-information-container {
+    width: 100%;
+    padding: 10px;
+    min-height: 90%;
+    display: flex;
+    justify-content: center;
+}
+.dashboard-course-uploader-card {
+    padding: 10px;
+    border-radius: 10px;
+    width: 90%;
+    padding-left: 20px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    /* background-color: black; */
+}
+.information-section-title {
+    font-size: 2rem;
+    text-transform: uppercase;
+}
+.dashboard-form-uploader-course {
+    width: 95%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+.dashboard-input-course-upload {
+    padding: 10px;
+    border-radius: 4px;
+    font-weight: 200;
+}
+
+.img-uploaded-content {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    object-fit: cover;
+    width: 20%;
+}

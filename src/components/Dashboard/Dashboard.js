@@ -16,6 +16,8 @@ const Dashboard = () => {
                         return <Test />
                     case "users":
                         return <Test />
+                    case "users/:id":
+                        return <Test />
                     default: <MainHeader />
                 }
             })()}
