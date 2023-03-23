@@ -1,11 +1,13 @@
-import React, {useState, useRef, useEffect} from 'react'
-import reaching from '../../reaching2/sui.mp4'
-import PlayArrowIcon from '@mui/icons-material/PlayArrow'; // play icon
-import PauseIcon from '@mui/icons-material/Pause'; // Pause Icon
-import VideoNext from "./VideoNext/VideoNext"
-import ListIcon from '@mui/icons-material/List';
-import './videopage.css'
-import axios from 'axios';
+import React, { useState, useRef, useEffect } from "react";
+import reaching from "../../reaching2/sui.mp4";
+import PlayArrowIcon from "@mui/icons-material/PlayArrow"; // play icon
+import PauseIcon from "@mui/icons-material/Pause"; // Pause Icon
+import VideoNext from "./VideoNext/VideoNext";
+import ListIcon from "@mui/icons-material/List";
+import { Link } from "react-router-dom";
+import { URL } from "../../URL";
+import "./videopage.css";
+import axios from "axios";
 const VideoPage = () => {
   const [isPlay, setIsPlay] = useState(false);
   const [data, setData] = useState();
@@ -17,8 +19,9 @@ const VideoPage = () => {
   const theaterRef = useRef();
   const fullScreenRef = useRef();
   const currentTimeRef = useRef();
-  const playBackBtnRef = useRef(); 
+  const playBackBtnRef = useRef();
   const totalTimeRef = useRef();
+  const currentIndex = document.URL.split("/")[5];
   const muteBtn = useRef();
   const sliderRef = useRef();
   const timelineContainer = useRef();
@@ -26,22 +29,20 @@ const VideoPage = () => {
   const courseId = document.URL.split("/")[4];
   const videoIdx = document.URL.split("/")[5];
 
-
-
   const fetchData = async () => {
-    const url = `https://backend-course-app-production-1670.up.railway.app/video/${courseId}/${videoIdx}`
+    const url = `${URL}video/${courseId}/${videoIdx}`;
     const results = await axios.get(url, {
       headers: {
-        "Authorization": `Bearer ${JSON.parse(localStorage.getItem("token"))}`
-      }
-    })
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
+      },
+    });
     setData(results.data);
-  }
+  };
 
   const playPauseHandler = () => {
-    setIsPlay(!isPlay)
+    setIsPlay(!isPlay);
     togglePlay();
-  }
+  };
   const handleKeyDown = (e) => {
     try {
       if (e.charChode === 39 || e.charCode === "j") {
@@ -50,12 +51,10 @@ const VideoPage = () => {
     } catch (err) {
       console.log(err);
     }
-  }
+  };
   useEffect(() => {
     fetchData();
-  }, [])
-  console.log(data);
-
+  }, []);
 
   function togglePlay() {
     if (isPlay === true) {
@@ -69,56 +68,62 @@ const VideoPage = () => {
   const handleVideoOnClick = () => {
     setIsPlay(!isPlay);
     togglePlay();
-  }
+  };
   // new commit
   // view modes
   //theater mode
   const handleTheaterOnClick = () => {
     toggleTheater();
-  }
+  };
   function toggleTheater() {
     containerRef.current.classList.toggle("theater");
   }
   const handleFullScreenMode = () => {
-    setIsFullScreen(!isFullScreen)
+    setIsFullScreen(!isFullScreen);
     toggleFullScreenMode();
-  }
+  };
   function toggleFullScreenMode() {
-    
     if (isFullScreen === true) {
       containerRef.current.requestFullscreen();
     } else {
       document.exitFullscreen();
     }
   }
-  document.addEventListener("fullscreenchange",() => {
-    containerRef.current.classList.toggle("full-screen", document.fullscreenElement);
-  })
+  document.addEventListener("fullscreenchange", () => {
+    containerRef.current.classList.toggle(
+      "full-screen",
+      document.fullscreenElement
+    );
+  });
 
   // duration
   const handleDurationLoad = () => {
-    totalTimeRef.current.innerText = formatDuration(videoRef.current.duration) 
-  }
-  
+    totalTimeRef.current.innerText = formatDuration(videoRef.current.duration);
+  };
+
   const leadingZeroFormatter = new Intl.NumberFormat(undefined, {
-    minimumIntegerDigits: 2
+    minimumIntegerDigits: 2,
   });
   function formatDuration(time) {
-      const secnds = Math.floor(time % 60);
-      const minutes = Math.floor(time / 60) % 60;
-      const hours = Math.floor(time / 3600);
-      if (hours === 0) {
-        return `${minutes}:${leadingZeroFormatter.format(secnds)}`
-      } else {
-        return `${hours}:${leadingZeroFormatter.format(minutes)}: ${leadingZeroFormatter.format(secnds)}`
-      }
+    const secnds = Math.floor(time % 60);
+    const minutes = Math.floor(time / 60) % 60;
+    const hours = Math.floor(time / 3600);
+    if (hours === 0) {
+      return `${minutes}:${leadingZeroFormatter.format(secnds)}`;
+    } else {
+      return `${hours}:${leadingZeroFormatter.format(
+        minutes
+      )}: ${leadingZeroFormatter.format(secnds)}`;
+    }
   }
 
   const handleTimeUpdate = () => {
-    currentTimeRef.current.textContent = formatDuration(videoRef.current.currentTime);
+    currentTimeRef.current.textContent = formatDuration(
+      videoRef.current.currentTime
+    );
     const percent = videoRef.current.currentTime / videoRef.current.duration;
     timelineContainer.current.style.setProperty("--progress-position", percent);
-  }
+  };
 
   function skip(timeInSeconds) {
     videoRef.current.currentTime += timeInSeconds;
@@ -127,12 +132,12 @@ const VideoPage = () => {
   function prevSkip(timeInSeconds) {
     videoRef.current.currentTime -= timeInSeconds;
   }
-  // volume slider 
+  // volume slider
   // we now have muteBtn ref and volume slider Ref
 
   const handleMuteBtnClick = () => {
-    toggleVolumeMuteUnmute()
-  }
+    toggleVolumeMuteUnmute();
+  };
 
   function toggleVolumeMuteUnmute() {
     videoRef.current.muted = !videoRef.current.muted;
@@ -140,47 +145,48 @@ const VideoPage = () => {
 
   const handleOnVolumeChange = () => {
     sliderRef.current.value = videoRef.current.volume;
-    let volumeLvl
+    let volumeLvl;
     if (videoRef.current.muted || videoRef.current.volume === 0) {
-        sliderRef.current.value = 0;
-        volumeLvl = "off"
-    } else if (videoRef.current.volume >= .5) {
-      volumeLvl = "high"
+      sliderRef.current.value = 0;
+      volumeLvl = "off";
+    } else if (videoRef.current.volume >= 0.5) {
+      volumeLvl = "high";
     } else {
-      volumeLvl = "low"
+      volumeLvl = "low";
     }
-    containerRef.current.dataset.volumeLevel = volumeLvl; 
-  }
+    containerRef.current.dataset.volumeLevel = volumeLvl;
+  };
   const handleOnInputSlider = (e) => {
     videoRef.current.volume = e.target.value;
     videoRef.current.muted = e.target.value === 0;
-  }
+  };
 
   const handleContext = (e) => {
     e.preventDefault();
-  }
+  };
   const handleDoubleClick = () => {
     skip(5);
-  }
+  };
   const handlePrevDoubleClick = () => {
     prevSkip(5);
-  }
+  };
 
   // playback
   const changePlayBackSpeed = () => {
-    let newSpeed = videoRef.current.playbackRate + .25;
+    let newSpeed = videoRef.current.playbackRate + 0.25;
     if (newSpeed > 2) {
-      newSpeed = .25;
+      newSpeed = 0.25;
     }
     videoRef.current.playbackRate = newSpeed;
     playBackBtnRef.current.textContent = `${newSpeed}x`;
-  }
-  // Timeline 
+  };
+  // Timeline
   let wasPaused;
 
   function toggleScrubbing(e) {
     const rect = timelineContainer.current.getBoundingClientRect();
-    const percentage = Math.min(Math.max(0, e.clientX - rect.x), rect.width) / rect.width;
+    const percentage =
+      Math.min(Math.max(0, e.clientX - rect.x), rect.width) / rect.width;
     setIsScrubbing((e.buttons & 1) === true);
     containerRef.current.classList.toggle("scrubbing");
     if (isScrubbing) {
@@ -189,147 +195,247 @@ const VideoPage = () => {
       togglePlay();
     } else {
       videoRef.current.currentTime = percentage * videoRef.current.duration;
-      setIsScrubbing(!isScrubbing)
+      setIsScrubbing(!isScrubbing);
       if (!wasPaused) videoRef.current.play();
     }
-    
-    console.log();
+
     handleTimeUpdate(e);
   }
   const handleMouseMove = (e) => {
     const rect = timelineContainer.current.getBoundingClientRect();
-    const percent = Math.min(Math.max(0, e.clientX - rect.x), rect.width) / rect.width;
-    
+    const percent =
+      Math.min(Math.max(0, e.clientX - rect.x), rect.width) / rect.width;
+
     timelineContainer.current.style.setProperty("--preview-position", percent);
 
     if (isScrubbing) {
-      e.preventDefault()
-      timelineContainer.current.style.setProperty("--preview-position", percent);
+      e.preventDefault();
+      timelineContainer.current.style.setProperty(
+        "--preview-position",
+        percent
+      );
     }
-
-  }
+  };
   const handleScrubbing = (e) => {
     toggleScrubbing(e);
-  }
+  };
   document.addEventListener("mouseup", (e) => {
     if (isScrubbing) {
       toggleScrubbing(e);
     }
-  })
+  });
   document.addEventListener("mousemove", (e) => {
     if (isScrubbing) {
       handleTimeUpdate(e);
     }
-  })
+  });
 
   const handleTopicList = () => {
     setIsTitleList(!isTitleList);
-  }
+  };
 
   return (
     <>
-    {
-      videoIdx > len ? (
+      {videoIdx > len ? (
         <>
-          <p>Error</p>
+          <p>Error don't try to hack this </p>
         </>
       ) : (
         <>
-          <section className="video-page-section" onContextMenu={handleContext} onKeyDown={handleKeyDown}>
+          <section
+            className="video-page-section"
+            onContextMenu={handleContext}
+            onKeyDown={handleKeyDown}
+          >
             <div className="information-video-page-section">
-              <h2>
-                {data?.courseName}
-              </h2>
+              <h2>{data?.courseName}</h2>
               <p>{data?.title}</p>
               <ListIcon onClick={handleTopicList} />
-              { isTitleList && (
+              {isTitleList && (
                 <>
-                <div className="title-arr-container">
-                  <ul className = "video-player-title-list">
-                    {data?.titleArr.map((item, idx) => {
-                      return (
-                        <>
-                          <li key = {idx}>{item}</li>
-                        </>
-                      )
-                    })}
-                  </ul>
-                </div>
+                  <div className="title-arr-container">
+                    <ul className="video-player-title-list">
+                      {data?.titleArr.map((item, idx) => {
+                        return (
+                          <>
+                            {currentIndex === idx}
+                            <Link
+                              reloadDocument
+                              to={`/course/${courseId}/${idx}`}
+                            >
+                              <li
+                                className={
+                                  currentIndex == idx
+                                    ? "bg-slate-700 text-white hover:bg-slate-900"
+                                    : "text-black hover:bg-black hover:text-white"
+                                }
+                                key={idx}
+                              >
+                                {item}
+                              </li>
+                            </Link>
+                          </>
+                        );
+                      })}
+                    </ul>
+                  </div>
                 </>
               )}
             </div>
-              <div ref = {containerRef} className="video-container pause" data-volume-level="high">
-                <div className="video-controls-container">
-                  <div onMouseMove={handleMouseMove} ref = {timelineContainer} onMouseDown={handleScrubbing} className="timeline-controls">
-                    <div className="timeline">
-                      <div className="thumb-indicator"></div>
-                    </div>
-                  </div>
-                  <div className="controls">
-
-                    <button onClick = {playPauseHandler} className="play-pause-btn">
-                      <PlayArrowIcon className = "play-icon"/>
-                      <PauseIcon className='pause-icon'/>
-                    </button>
-                    <div className="volume-container">
-                      <button onClick = {handleMuteBtnClick} className="mute-btn" ref = {muteBtn}>
-                          <svg className="volume-high-icon" viewBox="0 0 24 24">
-                            <path fill="currentColor" d="M14,3.23V5.29C16.89,6.15 19,8.83 19,12C19,15.17 16.89,17.84 14,18.7V20.77C18,19.86 21,16.28 21,12C21,7.72 18,4.14 14,3.23M16.5,12C16.5,10.23 15.5,8.71 14,7.97V16C15.5,15.29 16.5,13.76 16.5,12M3,9V15H7L12,20V4L7,9H3Z" />
-                          </svg>
-                          <svg  className="volume-low-icon" viewBox="0 0 24 24">
-                            <path fill="currentColor" d="M5,9V15H9L14,20V4L9,9M18.5,12C18.5,10.23 17.5,8.71 16,7.97V16C17.5,15.29 18.5,13.76 18.5,12Z" />
-                          </svg>
-                          <svg className="volume-muted-icon" viewBox="0 0 24 24">
-                            <path fill="currentColor" d="M12,4L9.91,6.09L12,8.18M4.27,3L3,4.27L7.73,9H3V15H7L12,20V13.27L16.25,17.53C15.58,18.04 14.83,18.46 14,18.7V20.77C15.38,20.45 16.63,19.82 17.68,18.96L19.73,21L21,19.73L12,10.73M19,12C19,12.94 18.8,13.82 18.46,14.64L19.97,16.15C20.62,14.91 21,13.5 21,12C21,7.72 18,4.14 14,3.23V5.29C16.89,6.15 19,8.83 19,12M16.5,12C16.5,10.23 15.5,8.71 14,7.97V10.18L16.45,12.63C16.5,12.43 16.5,12.21 16.5,12Z" />
-                          </svg> 
-                    
-                      </button>
-                      <input onInput={handleOnInputSlider} ref = {sliderRef} className = "volume-slider" type="range" min = {0} max = {1} step="any"/>
-                    </div>
-                    <div className="duration-container">
-                      <div ref = {currentTimeRef} className="current-time">
-                        0:00
-                      </div>
-                      /
-                      <div ref = {totalTimeRef}  className="total-time">
-                        10:00
-                      </div>
-                    </div>
-                    <button tooltip = "playback speed" onClick = {changePlayBackSpeed} ref = {playBackBtnRef} style={{fontSize: ".9rem",minWidth: "40px", backgroundColor: "white", color: "black", paddingLeft: "15px", textAlign: "center", paddingRight: "15px", height: "32px", borderRadius: "10px", display: "flex", justifyContent: "center", alignItems: "center"}} className="speed-btn wide-btn">
-                      1x
-                    </button>
-                    <button onClick={handleTheaterOnClick} ref = {theaterRef} className="theater-btn">
-                        <svg className="tall" viewBox="0 0 24 24">
-                          <path fill="currentColor" d="M19 6H5c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 10H5V8h14v8z"/>
-                        </svg>
-                        <svg className="wide" viewBox="0 0 24 24">
-                          <path fill="currentColor" d="M19 7H5c-1.1 0-2 .9-2 2v6c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zm0 8H5V9h14v6z"/>
-                        </svg> 
-                    </button>
-                    <button onClick = {handleFullScreenMode} ref = {fullScreenRef}  className="full-screen-btn">
-                        <svg className="open" viewBox="0 0 24 24">
-                          <path fill="currentColor" d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
-                        </svg>
-                        <svg className="close" viewBox="0 0 24 24">
-                          <path fill="currentColor" d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/>
-                        </svg>
-                    </button>
-                    
+            <div
+              ref={containerRef}
+              className="video-container pause"
+              data-volume-level="high"
+            >
+              <div className="video-controls-container">
+                <div
+                  onMouseMove={handleMouseMove}
+                  ref={timelineContainer}
+                  onMouseDown={handleScrubbing}
+                  className="timeline-controls"
+                >
+                  <div className="timeline">
+                    <div className="thumb-indicator"></div>
                   </div>
                 </div>
-                <video onTimeUpdate={handleTimeUpdate} onLoadedData={handleDurationLoad} autoPlay onVolumeChange={handleOnVolumeChange} ref = {videoRef} onClick = {handleVideoOnClick}  className = "course-video-player" src={`https://backend-course-app-production-1670.up.railway.app/uploads/${data?.name}`} controlsList="nodownload"></video>
-
-                <div onClick={handleVideoOnClick} onDoubleClick = {handleDoubleClick} className="absolute-right-div-for-double-click"></div>
-                <div onClick = {handleVideoOnClick} onDoubleClick = {handlePrevDoubleClick} className="absolute-left-div-for-double-click"></div>
+                <div className="controls">
+                  <button onClick={playPauseHandler} className="play-pause-btn">
+                    <PlayArrowIcon className="play-icon" />
+                    <PauseIcon className="pause-icon" />
+                  </button>
+                  <div className="volume-container">
+                    <button
+                      onClick={handleMuteBtnClick}
+                      className="mute-btn"
+                      ref={muteBtn}
+                    >
+                      <svg className="volume-high-icon" viewBox="0 0 24 24">
+                        <path
+                          fill="currentColor"
+                          d="M14,3.23V5.29C16.89,6.15 19,8.83 19,12C19,15.17 16.89,17.84 14,18.7V20.77C18,19.86 21,16.28 21,12C21,7.72 18,4.14 14,3.23M16.5,12C16.5,10.23 15.5,8.71 14,7.97V16C15.5,15.29 16.5,13.76 16.5,12M3,9V15H7L12,20V4L7,9H3Z"
+                        />
+                      </svg>
+                      <svg className="volume-low-icon" viewBox="0 0 24 24">
+                        <path
+                          fill="currentColor"
+                          d="M5,9V15H9L14,20V4L9,9M18.5,12C18.5,10.23 17.5,8.71 16,7.97V16C17.5,15.29 18.5,13.76 18.5,12Z"
+                        />
+                      </svg>
+                      <svg className="volume-muted-icon" viewBox="0 0 24 24">
+                        <path
+                          fill="currentColor"
+                          d="M12,4L9.91,6.09L12,8.18M4.27,3L3,4.27L7.73,9H3V15H7L12,20V13.27L16.25,17.53C15.58,18.04 14.83,18.46 14,18.7V20.77C15.38,20.45 16.63,19.82 17.68,18.96L19.73,21L21,19.73L12,10.73M19,12C19,12.94 18.8,13.82 18.46,14.64L19.97,16.15C20.62,14.91 21,13.5 21,12C21,7.72 18,4.14 14,3.23V5.29C16.89,6.15 19,8.83 19,12M16.5,12C16.5,10.23 15.5,8.71 14,7.97V10.18L16.45,12.63C16.5,12.43 16.5,12.21 16.5,12Z"
+                        />
+                      </svg>
+                    </button>
+                    <input
+                      onInput={handleOnInputSlider}
+                      ref={sliderRef}
+                      className="volume-slider"
+                      type="range"
+                      min={0}
+                      max={1}
+                      step="any"
+                    />
+                  </div>
+                  <div className="duration-container">
+                    <div ref={currentTimeRef} className="current-time">
+                      0:00
+                    </div>
+                    /
+                    <div ref={totalTimeRef} className="total-time">
+                      10:00
+                    </div>
+                  </div>
+                  <button
+                    tooltip="playback speed"
+                    onClick={changePlayBackSpeed}
+                    ref={playBackBtnRef}
+                    style={{
+                      fontSize: ".9rem",
+                      minWidth: "40px",
+                      backgroundColor: "white",
+                      color: "black",
+                      paddingLeft: "15px",
+                      textAlign: "center",
+                      paddingRight: "15px",
+                      height: "32px",
+                      borderRadius: "10px",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                    className="speed-btn wide-btn"
+                  >
+                    1x
+                  </button>
+                  <button
+                    onClick={handleTheaterOnClick}
+                    ref={theaterRef}
+                    className="theater-btn"
+                  >
+                    <svg className="tall" viewBox="0 0 24 24">
+                      <path
+                        fill="currentColor"
+                        d="M19 6H5c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 10H5V8h14v8z"
+                      />
+                    </svg>
+                    <svg className="wide" viewBox="0 0 24 24">
+                      <path
+                        fill="currentColor"
+                        d="M19 7H5c-1.1 0-2 .9-2 2v6c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zm0 8H5V9h14v6z"
+                      />
+                    </svg>
+                  </button>
+                  <button
+                    onClick={handleFullScreenMode}
+                    ref={fullScreenRef}
+                    className="full-screen-btn"
+                  >
+                    <svg className="open" viewBox="0 0 24 24">
+                      <path
+                        fill="currentColor"
+                        d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"
+                      />
+                    </svg>
+                    <svg className="close" viewBox="0 0 24 24">
+                      <path
+                        fill="currentColor"
+                        d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"
+                      />
+                    </svg>
+                  </button>
+                </div>
               </div>
-              
-          </section>
-          <VideoNext len = {len} courseId = {courseId} />
-        </>
-      )
-    }
-    </>
-  )
-}
+              <video
+                onTimeUpdate={handleTimeUpdate}
+                onLoadedData={handleDurationLoad}
+                autoPlay
+                onVolumeChange={handleOnVolumeChange}
+                ref={videoRef}
+                onClick={handleVideoOnClick}
+                className="course-video-player"
+                src={`http://localhost:8000/uploads/${data?.name}`}
+                controlsList="nodownload"
+              ></video>
 
-export default VideoPage
+              <div
+                onClick={handleVideoOnClick}
+                onDoubleClick={handleDoubleClick}
+                className="absolute-right-div-for-double-click"
+              ></div>
+              <div
+                onClick={handleVideoOnClick}
+                onDoubleClick={handlePrevDoubleClick}
+                className="absolute-left-div-for-double-click"
+              ></div>
+            </div>
+          </section>
+          <VideoNext len={len} courseId={courseId} />
+        </>
+      )}
+    </>
+  );
+};
+
+export default VideoPage;

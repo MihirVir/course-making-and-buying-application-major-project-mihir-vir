@@ -1,0 +1,84 @@
+.edit-dashboard-section {
+  width: 100%;
+  height: 92vh;
+  display: flex;
+  justify-content: center;
+  padding-left: 6%;
+  align-items: center;
+}
+.edit-dashboard-section-container {
+  width: 95%;
+  border-radius: 2px;
+  height: 90%;
+  padding: 10px;
+  background-color: aliceblue;
+}
+.edit-dashboard-section-coursename {
+  font-size: 1.5rem;
+  font-weight: 300;
+}
+.edit-dashboard-section-information-wrapper {
+  height: 6vh;
+  color: white;
+  padding-left: 10px;
+  border-radius: 1%;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  gap: 2em;
+  padding-right: 10px;
+  align-items: center;
+}
+.edit-dashboard-section-icon {
+  color: white;
+}
+.edit-text-course-name-inp {
+  padding: 2px;
+  padding-left: 4px;
+  font-weight: 300;
+  width: 400px;
+}
+.edit-course-change-name-btn {
+  margin-left: 15px;
+  background-color: white;
+  color: black;
+  padding: 2px;
+  padding-left: 9px;
+  padding-right: 9px;
+}
+.confirm-delete-edit-videos-pop {
+  position: absolute;
+  color: white;
+  padding: 10px;
+  top: 28%;
+  border-radius: 10px;
+  width: 30%;
+  height: 40%;
+  left: 45%;
+}
+.confirm-text {
+  font-size: 1.2rem;
+  text-shadow: 2px 2px 2px rgb(0, 0, 0);
+  font-weight: 900;
+}
+.confirm-edit-delete-form {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 20px;
+}
+
+.delete-confirm-btn-edit {
+  background-color: black;
+  padding: 5px;
+  border-radius: 10px;
+  transition: all 120ms ease;
+}
+
+.delete-confirm-btn-edit:hover {
+  background-color: white;
+  color: black;
+  transform: translateY(-2px);
+}
