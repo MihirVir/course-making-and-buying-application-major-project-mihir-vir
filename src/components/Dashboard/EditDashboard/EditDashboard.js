@@ -155,10 +155,14 @@ const EditDashboard = () => {
               <span className="bg-black table-heading">Course Name</span>
               <span className="bg-black table-heading">Delete Video Index</span>
             </div>
+
             {course?.title.map((item, idx) => {
               return (
                 <>
-                  <div className="delete-dashboard-table-contents text-white">
+                  <div
+                    key={idx}
+                    className="delete-dashboard-table-contents text-white"
+                  >
                     <span className="custom-serial-delete delete-dashboard-table-content bg-slate-800">
                       {idx + 1}
                     </span>

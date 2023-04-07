@@ -4,6 +4,7 @@ import MainHeader from "./MainHeader/MainHeader";
 import Test from "./Test/Test";
 import DeleteDashboard from "./DeleteDashboard/DeleteDashboard";
 import "./dashboard.css";
+import Stats from "./Stats/Stats";
 import EditDashboard from "./EditDashboard/EditDashboard";
 const Dashboard = () => {
   const id = document.URL.split("/")[4];
@@ -15,7 +16,7 @@ const Dashboard = () => {
       {(() => {
         switch (id) {
           case "statistics":
-            return <Test />;
+            return <Stats />;
           case "users":
             return <Test />;
           case "users/:id":
