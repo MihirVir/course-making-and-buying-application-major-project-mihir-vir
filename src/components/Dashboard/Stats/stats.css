@@ -1,6 +1,6 @@
 .user-stats-section {
   width: 100vw;
-  height: 92vh;
+  min-height: 92vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -8,6 +8,10 @@
 .user-stats-container {
   width: 85%;
   height: 90%;
+  gap: 1em;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(150px, auto);
   padding: 0.5rem;
   border-radius: 4px;
 }
@@ -21,6 +25,7 @@
   justify-content: space-around;
   align-items: flex-start;
   height: 24vh;
+  box-shadow: 2px 2px 0px white;
 }
 .user-online-course-img {
   padding: 5px;
@@ -42,6 +47,36 @@
   font-size: 2rem;
   color: greenyellow;
 }
+.user-total-grand {
+  padding-top: 10px;
+  font-size: 1.1rem;
+  font-weight: 900;
+}
+.user-line-graph-chart {
+  border-radius: 10px;
+  padding: 4px;
+  width: 100%;
+  background-color: white;
+  height: 100%;
+  grid-column: 1/3;
+  grid-row: 1/3;
+  transition: all 200ms ease-in-out;
+}
+.user-line-graph-chart:hover {
+  background-color: rgb(255, 248, 234);
+  outline: black;
+}
+.supreme-grid-user {
+  grid-column: 3/4;
+  grid-row: 3/4;
+}
+.user-line-graph {
+  height: 100%;
+  grid-row: 3/3;
+  width: 100%;
+  grid-column: 1/3;
+}
+/* animation */
 .user-stats-card-container:hover .user-online-course-img {
   filter: invert(1);
   transform: translateY(7px);
