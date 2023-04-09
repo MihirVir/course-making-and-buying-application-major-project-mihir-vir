@@ -5,7 +5,6 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import LeaderboardIcon from "@mui/icons-material/Leaderboard";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
-import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
 import { Link } from "react-router-dom";
 import "./navdash.css";
 const NavDash = () => {
@@ -18,7 +17,7 @@ const NavDash = () => {
 
   return (
     <>
-      <section className="nav-dash-section">
+      <section className="nav-dash-section bg-neutral-900">
         <div className="nav-dash-contaner">
           <div
             ref={menuRef}

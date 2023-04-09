@@ -1,7 +1,7 @@
 .nav-dash-section {
   min-width: 5%;
   padding: auto;
-  background-color: blue;
+  /* background-color: blue; */
   height: 100vh;
   position: fixed;
 }
@@ -27,7 +27,7 @@
   transform: opacity 1000ms ease-in-out;
 }
 .nav-dash-list-items {
-  height: 80vh;
+  height: 45vh;
   display: flex;
   justify-content: center;
 }
