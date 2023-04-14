@@ -5,6 +5,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import LeaderboardIcon from "@mui/icons-material/Leaderboard";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
+import CreateIcon from "@mui/icons-material/Create";
 import { Link } from "react-router-dom";
 import "./navdash.css";
 const NavDash = () => {
@@ -109,6 +110,28 @@ const NavDash = () => {
                   {isFull && <span>Users</span>}
                 </li>
               </Link>
+              <Link
+                reloadDocument
+                className="dash-links"
+                to="/dashboard/create"
+              >
+                <li>
+                  <CreateIcon
+                    style={
+                      !isFull
+                        ? {
+                            width: "100%",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                          }
+                        : {}
+                    }
+                  />
+                  {isFull && <span>Upload</span>}
+                </li>
+              </Link>
+
               {/* <Link
                 className="dash-links"
                 reloadDocument

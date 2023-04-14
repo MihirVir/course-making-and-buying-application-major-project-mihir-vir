@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { registerables, Chart, ArcElement, Tooltip, Legend } from "chart.js";
 import { Line, Pie } from "react-chartjs-2";
 import axios from "axios";
+import { URL } from "../../../URL";
 import "./stats.css";
 Chart.register(...registerables, ArcElement, Tooltip, Legend);
 const Stats = () => {
@@ -9,11 +10,12 @@ const Stats = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [graphData, setGraphData] = useState();
   const [pieData, setPieData] = useState([]);
+  console.log(pieData);
   const testData = {
-    labels: pieData.map((item) => item?.course.courseName),
+    labels: pieData.sortedCourses?.map((item) => item?.course.courseName),
     datasets: [
       {
-        data: pieData.map((item) => item?.count),
+        data: pieData.sortedCourses?.map((item) => item?.count),
         backgroundColor: [
           "rgb(245,146,65)",
           "rgb(231,207,93)",
@@ -27,7 +29,7 @@ const Stats = () => {
   // fetch graph data
   const fetchGraphsData = async () => {
     try {
-      const url = "http://localhost:8000/admin/";
+      const url = `${URL}admin/`;
       const res = await axios.get(url, {
         headers: {
           Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
@@ -40,7 +42,7 @@ const Stats = () => {
   // fetch pie data
   const fetchPieData = async () => {
     try {
-      const url = `http://localhost:8000/admin/graphs`;
+      const url = `${URL}admin/graphs`;
       const res = await axios.get(url, {
         headers: {
           Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
@@ -56,7 +58,7 @@ const Stats = () => {
   const fetchCourseCount = async () => {
     try {
       setIsLoading(true);
-      const url = `http://localhost:8000/admin/count`;
+      const url = `${URL}admin/count`;
       const res = await axios.get(url, {
         headers: {
           Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
@@ -120,6 +122,19 @@ const Stats = () => {
               />
             </div>
           </div>
+          <div className="user-stats-card-container   bg-black supreme-review-grid-user">
+            <span className="text-white user-custom-title">Average Rating</span>
+            <span className="text-green-500 user-total-grand">
+              {pieData.rating}
+            </span>
+            <div className="user-stats-svg">
+              <img
+                className="user-online-course-img"
+                src="/money.svg"
+                alt="no img available"
+              />
+            </div>
+          </div>
           <div className="user-line-graph-chart">
             <Line
               data={{
@@ -148,7 +163,12 @@ const Stats = () => {
               }}
             />
           </div>
-          <div className="user-line-graph pie-graph-edit">
+          <div
+            className="user-line-graph pie-graph-edit"
+            style={{
+              height: "400px",
+            }}
+          >
             <h4 className="user-graph-titles">Top Three Selling Courses</h4>
             <Pie data={testData} options={options}></Pie>
           </div>

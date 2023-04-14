@@ -9,8 +9,10 @@ import "./editdashboard.css";
 const EditDashboard = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [videos, setVideos] = useState([]);
+  const [isEditMode, setIsEditMode] = useState(false);
   const [courseName, setCourseName] = useState("");
   const id = document.URL.split("/")[5];
+  const setEditIndex = useState(0);
   const [index, setIndex] = useState({
     id: -1,
     template: "",
@@ -88,7 +90,10 @@ const EditDashboard = () => {
       template: template,
     });
   };
-
+  const handleEditMode = (idx) => {
+    setIsEditMode((prev) => !prev);
+    setEditIndex(idx);
+  };
   const handleInputChange = (e) => {
     setCourseName(e.target.value);
   };
@@ -153,7 +158,7 @@ const EditDashboard = () => {
             <div className="delete-dashboard-table-heading text-white">
               <span className="bg-black table-heading">Serial Number</span>
               <span className="bg-black table-heading">Course Name</span>
-              <span className="bg-black table-heading">Delete Video Index</span>
+              <span className="bg-black table-heading">Action</span>
             </div>
 
             {course?.title.map((item, idx) => {
@@ -170,6 +175,14 @@ const EditDashboard = () => {
                       {item}
                     </span>
                     <span className="delete-dashboard-table-content bg-slate-800">
+                      <EditIcon
+                        style={{
+                          marginRight: "1rem",
+                        }}
+                        onClick={() => {
+                          handleEditMode(idx);
+                        }}
+                      />
                       <DeleteIcon
                         onClick={() => setOpenDelete(idx, course?.template)}
                       />
@@ -202,6 +215,9 @@ const EditDashboard = () => {
               </div>
             </>
           )}
+          <div className="edit-course-video">
+            <form></form>
+          </div>
         </div>
       </section>
     </>

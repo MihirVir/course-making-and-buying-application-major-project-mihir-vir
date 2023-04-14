@@ -82,3 +82,13 @@
   color: black;
   transform: translateY(-2px);
 }
+.edit-course-video {
+  height: 60%;
+  width: 40%;
+  background-color: teal;
+  position: absolute;
+  top: 20%;
+  padding: 1rem;
+  border-radius: 8px;
+  left: 35%;
+}

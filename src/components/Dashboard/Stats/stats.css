@@ -73,6 +73,10 @@
   grid-column: 3/4;
   grid-row: 3/4;
 }
+.supreme-review-grid-user {
+  grid-column: 3/4;
+  /* margin-top: -14.5rem; */
+}
 .user-line-graph {
   height: 100%;
   grid-row: 3/3;
