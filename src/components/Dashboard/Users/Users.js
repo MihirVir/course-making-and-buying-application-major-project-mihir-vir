@@ -46,6 +46,7 @@ const Users = () => {
       </li>
     );
   }
+  console.log(response);
   return (
     <>
       {isError ? (
@@ -74,7 +75,7 @@ const Users = () => {
                           <td>{parseInt(idx + 1)}</td>
                           <td>{item?.customer.username}</td>
                           <td>{item?.customer.email}</td>
-                          <td>{item?.coursesPurchased?.courseName}</td>
+                          <td>{item?.customer.email}</td>
                           <td>2023</td>
                         </tr>
                       </>

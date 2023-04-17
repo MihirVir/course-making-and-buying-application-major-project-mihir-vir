@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import MainHeader from "../MainHeader/MainHeader";
 import NavDash from "../NavDash/NavDash";
 import EditIcon from "@mui/icons-material/Edit";
+import CloseIcon from "@mui/icons-material/Close";
 import axios from "axios";
 import { URL } from "../../../URL";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -11,8 +12,12 @@ const EditDashboard = () => {
   const [videos, setVideos] = useState([]);
   const [isEditMode, setIsEditMode] = useState(false);
   const [courseName, setCourseName] = useState("");
+  const [idx, setIdx] = useState(-1);
+  const [newTitle, setNewTitle] = useState("");
   const id = document.URL.split("/")[5];
-  const setEditIndex = useState(0);
+  const [file, setFile] = useState("");
+  const [editIndex, setEditIndex] = useState(0);
+  const [ani, setAni] = useState(false);
   const [index, setIndex] = useState({
     id: -1,
     template: "",
@@ -58,8 +63,9 @@ const EditDashboard = () => {
     fetchCourse();
     fetchVideos();
   }, []);
-  const handleInputOpen = () => {
+  const handleInputOpen = (idx) => {
     setIsOpen((prev) => !prev);
+    setEditIndex(idx);
   };
   const handleNameChange = (e) => {
     e.preventDefault();
@@ -82,7 +88,10 @@ const EditDashboard = () => {
       console.log(err);
     }
   };
-
+  const handlingMode = () => {
+    setIsEditMode(false);
+    setAni((prev) => !prev);
+  };
   const setOpenDelete = (idx, template) => {
     setConfirmDelete((prev) => !prev);
     setIndex({
@@ -91,8 +100,8 @@ const EditDashboard = () => {
     });
   };
   const handleEditMode = (idx) => {
-    setIsEditMode((prev) => !prev);
-    setEditIndex(idx);
+    setIsEditMode(!isEditMode);
+    setIdx(idx);
   };
   const handleInputChange = (e) => {
     setCourseName(e.target.value);
@@ -122,6 +131,54 @@ const EditDashboard = () => {
     }
   };
 
+  const handleNewVideoTitle = async (e) => {
+    e.preventDefault();
+    try {
+      const url = `${URL}video/title/${id}`;
+      console.log("submiting");
+      const res = await axios.put(
+        url,
+        { idx: idx, title: newTitle },
+        {
+          headers: {
+            Authorization: `Bearer ${JSON.parse(
+              localStorage.getItem("token")
+            )}`,
+          },
+        }
+      );
+      fetchCourse();
+      fetchVideos();
+      setIsEditMode(false);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleImageChange = (e) => {
+    const filer = e.target.files[0];
+    setFile(filer);
+  };
+  console.log(file);
+  const handleNewVideoSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const url = `${URL}video/video/${id}`;
+      const data = new FormData();
+      data.append("video", file);
+      data.append("idx", idx);
+      const res = await axios.put(url, data, {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
+        },
+      });
+      fetchVideos();
+      setIsEditMode(false);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <>
       <NavDash />
@@ -136,7 +193,7 @@ const EditDashboard = () => {
               <EditIcon onClick={handleInputOpen} />
               {isOpen && (
                 <>
-                  <form onSubmit={handleNameChange}>
+                  <form onSubmit={handleNewVideoTitle}>
                     <input
                       className="edit-text-course-name-inp text-black"
                       name="edit"
@@ -195,7 +252,7 @@ const EditDashboard = () => {
           {confirmDelete && (
             <>
               <div
-                className="confirm-delete-edit-videos-pop"
+                className={`confirm-delete-edit-videos-pop`}
                 style={{
                   background: `url(${URL}templates/${index.template}) `,
                   backgroundSize: "cover",
@@ -215,9 +272,67 @@ const EditDashboard = () => {
               </div>
             </>
           )}
-          <div className="edit-course-video">
-            <form></form>
-          </div>
+          {isEditMode && (
+            <>
+              <div
+                className={
+                  isEditMode
+                    ? `edit-course-video active-video`
+                    : ani
+                    ? `edit-course-video not-active-video`
+                    : "edit-course-video"
+                }
+              >
+                <div
+                  onClick={handlingMode}
+                  className="close-icon-container  edit-course-close-icons text-white  right-10 top-8"
+                >
+                  <h2 className="edit-action-title">Edit Action</h2>
+                  <CloseIcon onClick={handlingMode} />
+                </div>
+                <form
+                  className="edit-course-video-form"
+                  onSubmit={handleNewVideoTitle}
+                >
+                  <label className="text-slate-300 custom-edit-course-label">
+                    Title
+                  </label>
+                  <input
+                    onChange={(e) => setNewTitle(e.target.value)}
+                    name="videoTitle"
+                    placeholder="new video title"
+                    type="text"
+                    className="bg-slate-900 custom-edit-course-inp"
+                  />
+                  <button
+                    className="custom-edit-course-btn bg-slate-600 hover:bg-slate-700"
+                    type="submit"
+                  >
+                    Change Title
+                  </button>
+                </form>
+                <form onSubmit={handleNewVideoSubmit}>
+                  <h2 className="text-slate-300 mt-4 custom-edit-course-label">
+                    Change Video
+                  </h2>
+                  <input
+                    className="mt-1 text-white bg-slate-800 edit-course-file-inp"
+                    type="file"
+                    onChange={handleImageChange}
+                  />
+                  <button
+                    type="submit"
+                    className="text-white mt-2 custom-edit-course-btn bg-slate-600"
+                  >
+                    Submit
+                  </button>
+                </form>
+                <p className="text-white custom-edit-course-p">
+                  After Submitting the any of the following the box will close
+                </p>
+              </div>
+            </>
+          )}
         </div>
       </section>
     </>

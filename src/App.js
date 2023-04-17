@@ -13,6 +13,7 @@ import { store } from "./store";
 import Search from "./components/Search/Search";
 import VideoUploader from "./components/Dashboard/VideoUploader/VideoUploader";
 import EditDashboard from "./components/Dashboard/EditDashboard/EditDashboard";
+import Payment from "./components/Payment/Payment";
 function App() {
   return (
     <>
@@ -43,6 +44,7 @@ function App() {
               path="/dashboard/edit/:id"
               element={<EditDashboard />}
             ></Route>
+            <Route exact path="/payment/:id" element={<Payment />}></Route>
           </Routes>
         </Router>
       </Provider>

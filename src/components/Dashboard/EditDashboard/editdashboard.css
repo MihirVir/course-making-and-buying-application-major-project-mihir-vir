@@ -85,10 +85,92 @@
 .edit-course-video {
   height: 60%;
   width: 40%;
-  background-color: teal;
+  background-color: black;
+  box-shadow: 4px 2px 15px 5px rgba(0, 0, 0, 0.4);
   position: absolute;
   top: 20%;
   padding: 1rem;
   border-radius: 8px;
   left: 35%;
+}
+.edit-action-title {
+  font-size: 2rem;
+  color: white;
+}
+.custom-edit-course-inp {
+  padding: 0.5rem;
+  width: 98%;
+  border: none;
+  color: white;
+  font-weight: 400;
+}
+.edit-course-video-form {
+  position: relative;
+}
+.custom-edit-course-inp:focus {
+  outline: 2px solid white;
+}
+.custom-edit-course-label {
+  font-size: 1rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+.custom-edit-course-btn {
+  padding: 0.5rem;
+  color: white;
+  text-align: center;
+  margin-top: 0.6rem;
+  width: 98%;
+  transition: all 150ms ease;
+}
+.close-icon-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-right: 2rem;
+  align-items: center;
+}
+.edit-course-video.active-video {
+  animation: scalingFramer 200ms 1 ease;
+}
+.edit-course-video.not-active-video {
+  animation: scalingOffFramer 200ms 1 ease;
+}
+.edit-course-file-inp {
+  width: 98%;
+  padding: 0.5rem;
+}
+.edit-course-file-inp::-webkit-file-upload-button {
+  background-color: transparent;
+  outline: none;
+  color: white;
+  font-size: 1.2rem;
+  border: none;
+}
+.custom-edit-course-p {
+  margin-top: 1.5rem;
+
+  width: 95%;
+  text-align: center;
+}
+.edit-course-file-inp {
+  font-size: 0.7rem;
+}
+@keyframes scalingFramer {
+  0% {
+    transform: scale(0.6);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes scalingOffFramer {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
 }
