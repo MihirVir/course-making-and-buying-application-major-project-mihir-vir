@@ -1,75 +1,78 @@
- .login-section {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    flex-direction: column;
-    background-color: rgb(28,29,31);
+.login-section {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+  background-color: rgb(28, 29, 31);
 }
 
+.login-container {
+  display: flex;
+  height: 80%;
+  width: 34%;
+  align-items: center;
+  justify-content: center;
 
- .login-container {
-    display: flex;
-    height: 80%;
-    width: 34%;
-    align-items: center;
-    justify-content: center;
-    background-color: #fefefe;
-    border-radius: 10px;
-    box-shadow:10px 12px 10px rgba(30, 30, 30, .2);
-} 
+  border-radius: 10px;
+  box-shadow: 10px 12px 10px rgba(30, 30, 30, 0.2);
+}
 
 .text-view {
-    width: 80%;
+  width: 80%;
 }
 .login-form-style {
-    width: 90%;
-    height: 80%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-direction: column;
+  width: 90%;
+  height: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
 }
 .form-heading {
-    font-size: 4rem;
-    text-transform: uppercase;
-    letter-spacing: 4px;
-    font-weight: 800;
+  font-size: 4rem;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-weight: 800;
 }
 .submit-btn {
-    padding: 10px;
-    background-color: transparent;
-    outline: none;
-    width: 80%;
-    border-radius: 2px;
-    font-size: 1rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    transition: all 330ms ease-in-out;
+  padding: 10px;
+  background-color: transparent;
+  outline: none;
+  width: 90%;
+  border-radius: 2px;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  background-color: white;
+  transition: all 330ms ease-in-out;
 }
-
+.input-field-login {
+  padding: 0.5rem;
+  height: 3rem;
+  width: 90%;
+  border-radius: 0.1rem;
+  font-weight: 500;
+}
 .submit-btn:hover {
-    background-color: black;
-    color: white;
+  background-color: rgb(218, 218, 218);
 }
+@media screen and (max-width: 700px) {
+  .login-container {
+    width: 90%;
+    text-align: center;
+    height: 65%;
+  }
 
-@media screen and (max-width: 700px){
-    
-    .login-container {
-        width: 90%;
-        text-align: center;
-        height: 65%;
-    }
-    
-    .submit-btn {
-        width: 85%;
-    }
-    .login-form-style {
-        width: 100%;
-    }
-    .text-view {
-        width: 85%;
-    }
+  .submit-btn {
+    width: 85%;
+  }
+  .login-form-style {
+    width: 100%;
+  }
+  .text-view {
+    width: 85%;
+  }
 }

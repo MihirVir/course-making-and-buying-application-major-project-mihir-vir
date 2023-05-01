@@ -17,7 +17,7 @@ const Users = () => {
     try {
       setIsLoading(true);
 
-      const url = `http://localhost:8000/admin/users/${currentPage}`;
+      const url = `${URL}admin/users/${currentPage}`;
       const res = await axios.get(url, {
         headers: {
           Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,

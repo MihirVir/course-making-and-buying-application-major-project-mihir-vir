@@ -1,5 +1,5 @@
 import { useState, useReducer, useEffect } from "react";
-import { TextField, Alert } from "@mui/material";
+import { Alert } from "@mui/material";
 import { URL } from "../../URL";
 import { useNavigate } from "react-router-dom";
 import { registerReducer, INITIAL_STATE } from "../../reducers/registerReducer";
@@ -7,7 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import "./login.css";
-import SetCookie from "../../hooks/setCookie";
+// import SetCookie from "../../hooks/setCookie";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -74,27 +74,27 @@ const Login = () => {
             </Alert>
           </>
         )}
-        <div className="login-container">
+        <div className="login-container bg-neutral-900">
           <ToastContainer />
           <form onSubmit={handleSubmit} className="login-form-style">
-            <h2 className="form-heading">Login</h2>
-            <TextField
+            <h2 className="form-heading text-white">Login</h2>
+            <input
+              type="text"
+              className="input-field-login"
               onChange={handleChange}
-              variant="outlined"
               name="email"
-              label="Email"
-              className="text-view"
-            />
-            <TextField
-              onChange={handleChange}
-              variant="outlined"
-              name="password"
-              label="Password"
-              type="password"
-              className="text-view"
+              placeholder="email"
             />
 
-            <button type="submit" className="submit-btn">
+            <input
+              className="input-field-login"
+              type="password"
+              onChange={handleChange}
+              name="password"
+              placeholder="password"
+            />
+
+            <button type="submit" className="submit-btn ">
               {loading ? "Loading..." : "Login"}
             </button>
 
@@ -102,8 +102,13 @@ const Login = () => {
               onClick={() => {
                 navigate("/register");
               }}
+              className="text-white"
+              style={{
+                cursor: "pointer",
+              }}
             >
-              Don't have an account? click to register
+              Don't have an account? click to register (working on CSS Tho won't
+              be styled) the logic works
             </p>
           </form>
         </div>

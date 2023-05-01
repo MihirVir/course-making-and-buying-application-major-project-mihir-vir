@@ -415,7 +415,7 @@ const VideoPage = () => {
                 ref={videoRef}
                 onClick={handleVideoOnClick}
                 className="course-video-player"
-                src={`http://localhost:8000/uploads/${data?.name}`}
+                src={`${URL}uploads/${data?.name}`}
                 controlsList="nodownload"
               ></video>
 
