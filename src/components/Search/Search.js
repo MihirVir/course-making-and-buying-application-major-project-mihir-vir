@@ -119,8 +119,8 @@ const Search = () => {
                     <img
                       loading="lazy"
                       className="result-section-img"
-                      src={`https://backend-course-app-production-1670.up.railway.app/templates/${item.template}`}
-                      alt=""
+                      src={`${URL}templates/${item.template}`}
+                      alt="broken image"
                     />
                     <div className="result-section-course-info-container">
                       <div className="basic-course-info">

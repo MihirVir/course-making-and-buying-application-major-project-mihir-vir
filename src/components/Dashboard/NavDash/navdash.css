@@ -1,7 +1,8 @@
 .nav-dash-section {
-  min-width: 5%;
-  padding: auto;
+  min-width: 2%;
+
   /* background-color: blue; */
+
   height: 100vh;
   position: fixed;
 }
@@ -80,6 +81,7 @@
   .nav-dash-list-items-ul {
     width: 100%;
   }
+
   .dash-links {
     width: 100%;
     display: flex;
@@ -92,7 +94,7 @@
 
   .welcome-nav-dash-info-container {
     width: 60%;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    /* padding-top: 10px; */
+    /* padding-bottom: 10px; */
   }
 }

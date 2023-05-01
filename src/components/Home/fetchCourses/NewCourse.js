@@ -27,7 +27,7 @@ const NewCourse = ({ accessToken }) => {
     <>
       <section className="home-card-rec">
         <div className="home-card-rec-title">
-          <h3 className="section-title">Recommended Courses</h3>
+          <h3 className="section-title text-center">New Courses</h3>
         </div>
         <div className="home-rec-card">
           <div className="home-rec-card-items">
@@ -172,21 +172,6 @@ const NewCourse = ({ accessToken }) => {
             )}
           </div>
         </div>
-        <h2 style={{ padding: "10px" }}>docs</h2>
-        <a className="docs" href="">
-          these links may or maynot work so please add it manually!
-        </a>
-        <Link className="docs" to="/login">
-          Login Page Colors Not Fixed! add /login path to the url
-        </Link>
-        <Link className="docs">email: mihirvir@mihir.com password: 123</Link>
-        <Link className="docs" to="/course/123">
-          Course Detail Page add /course/123 to the url
-        </Link>
-        <Link className="docs" to="course/video/1">
-          Video Player Page add /course/video/1 to the url
-        </Link>
-        <h1 style={{ padding: "10px" }}>Doesn't work on MOBILE</h1>
       </section>
     </>
   );

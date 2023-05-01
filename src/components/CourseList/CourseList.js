@@ -8,11 +8,7 @@ import { URL } from "../../URL";
 import axios from "axios";
 const CourseList = () => {
   const [loading, setLoading] = useState(true);
-  const [courseDetails, setCourseDetails] = useState({
-    author: {
-      username: "",
-    },
-  });
+  const [courseDetails, setCourseDetails] = useState(null);
   const [isPurchased, setIsPurchased] = useState(false);
 
   const url = document.URL;
@@ -41,20 +37,28 @@ const CourseList = () => {
   console.log(courseDetails);
   return (
     <>
-      <section onContextMenu={(e) => e.preventDefault()}>
-        <CustomNav />
-        <CourseTitle
-          courseDetails={courseDetails}
-          purchased={isPurchased}
-          isLoading={loading}
-        />
-        <CourseDetail
-          courseDetails={courseDetails}
-          purchased={isPurchased}
-          isLoading={loading}
-        />
-        <CourseVideo />
-      </section>
+      {courseDetails ? (
+        <>
+          <section onContextMenu={(e) => e.preventDefault()}>
+            <CustomNav />
+            <CourseTitle
+              courseDetails={courseDetails}
+              purchased={isPurchased}
+              isLoading={loading}
+            />
+            <CourseDetail
+              courseDetails={courseDetails}
+              purchased={isPurchased}
+              isLoading={loading}
+            />
+            <CourseVideo />
+          </section>
+        </>
+      ) : (
+        <>
+          <h4>Error</h4>
+        </>
+      )}
     </>
   );
 };

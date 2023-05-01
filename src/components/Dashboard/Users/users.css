@@ -16,6 +16,13 @@
 .dashboard-users-page-table {
   width: 100%;
 }
+.tipper {
+  position: absolute;
+  background-color: black;
+  padding: 0.25rem;
+  border-radius: 2px;
+}
+
 th,
 td {
   padding: 0.5rem;

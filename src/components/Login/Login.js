@@ -42,9 +42,9 @@ const Login = () => {
     localStorage.setItem("userId", JSON.stringify(res.data.existingUser._id));
     localStorage.setItem("token", JSON.stringify(res.data.token));
 
+    navigate("/");
     if (res.status === 200) {
       // saveAccessToken(res.data.token);
-      navigate("/");
     }
   };
   const handleChange = (e) => {

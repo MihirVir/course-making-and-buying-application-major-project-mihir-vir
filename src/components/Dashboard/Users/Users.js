@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { URL } from "../../../URL";
 import "./users.css";
 const Users = () => {
@@ -7,6 +7,12 @@ const Users = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [location, setLocation] = useState({
+    top: 0,
+    left: 0,
+  });
+  const [toolTip, setToolTip] = useState(false);
+  const courseNameRef = useRef(null);
   const fetchData = async () => {
     try {
       setIsLoading(true);
@@ -46,7 +52,17 @@ const Users = () => {
       </li>
     );
   }
-  console.log(response);
+  const handleEnterEvent = () => {
+    const { top, left } = courseNameRef.current.getBoundingClientRect();
+    setLocation({
+      top: top,
+      left: left,
+    });
+    setToolTip(true);
+  };
+  const handleLeaveEvent = () => {
+    setToolTip(false);
+  };
   return (
     <>
       {isError ? (
@@ -75,7 +91,28 @@ const Users = () => {
                           <td>{parseInt(idx + 1)}</td>
                           <td>{item?.customer.username}</td>
                           <td>{item?.customer.email}</td>
-                          <td>{item?.customer.email}</td>
+                          <td
+                            ref={courseNameRef}
+                            onMouseEnter={handleEnterEvent}
+                            onMouseLeave={handleLeaveEvent}
+                          >
+                            {item?.coursesPurchased.courseName.substring(0, 12)}
+                            {toolTip && (
+                              <>
+                                <div
+                                  className={
+                                    toolTip ? "tipper acitve" : `tipper`
+                                  }
+                                  style={{
+                                    top: `${parseInt(location.top) + 5}px`,
+                                    left: `${parseInt(location.left) + 165}px`,
+                                  }}
+                                >
+                                  {item?.coursesPurchased.courseName}
+                                </div>
+                              </>
+                            )}
+                          </td>
                           <td>2023</td>
                         </tr>
                       </>

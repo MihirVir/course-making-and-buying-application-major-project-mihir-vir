@@ -5,7 +5,7 @@ import { URL } from "../../../URL";
 import axios from "axios";
 const CourseTitle = ({ courseDetails, isLoading }) => {
   const [restObject, setRestObject] = useState({});
-
+  console.log("these nuts", courseDetails);
   return (
     <>
       <section className="specific-course-details">
@@ -25,7 +25,7 @@ const CourseTitle = ({ courseDetails, isLoading }) => {
                 temporibus nostrum et quos porro.
               </p>
               <div className="rating">
-                <span className="rating-text">{courseDetails.rating}</span>
+                <span className="rating-text"></span>
                 <Rating
                   sx={{ filter: "invert(100);", color: "#000" }}
                   name="read-only"
@@ -48,7 +48,7 @@ const CourseTitle = ({ courseDetails, isLoading }) => {
             >
               <img
                 className="specific-course-img"
-                src={`${URL}templates/${courseDetails?.template}`}
+                src={`${URL}templates/${courseDetails.template}`}
                 alt="no img avaiable"
               />
               <div className="specific-course-item-details">

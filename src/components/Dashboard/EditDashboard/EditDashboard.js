@@ -154,7 +154,7 @@ const EditDashboard = () => {
       console.log(err);
     }
   };
-
+  console.log(course);
   const handleImageChange = (e) => {
     const filer = e.target.files[0];
     setFile(filer);
@@ -193,7 +193,7 @@ const EditDashboard = () => {
               <EditIcon onClick={handleInputOpen} />
               {isOpen && (
                 <>
-                  <form onSubmit={handleNewVideoTitle}>
+                  <form onSubmit={handleNameChange}>
                     <input
                       className="edit-text-course-name-inp text-black"
                       name="edit"
