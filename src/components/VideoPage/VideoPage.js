@@ -11,6 +11,8 @@ import axios from "axios";
 const VideoPage = () => {
   const [isPlay, setIsPlay] = useState(false);
   const [data, setData] = useState();
+
+  const [len, setLen] = useState(0);
   const [isFullScreen, setIsFullScreen] = useState(true);
   const [isScrubbing, setIsScrubbing] = useState(false);
   const [isTitleList, setIsTitleList] = useState(false);
@@ -25,10 +27,23 @@ const VideoPage = () => {
   const muteBtn = useRef();
   const sliderRef = useRef();
   const timelineContainer = useRef();
-  const len = 1;
+
   const courseId = document.URL.split("/")[4];
   const videoIdx = document.URL.split("/")[5];
-
+  const fetchCourseData = async () => {
+    try {
+      const url = `${URL}test/${courseId}`;
+      const result = await axios.get(url, {
+        withCredentials: false,
+        headers: {
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
+        },
+      });
+      setLen(result.data.title.length);
+    } catch (err) {
+      console.log(err);
+    }
+  };
   const fetchData = async () => {
     const url = `${URL}video/${courseId}/${videoIdx}`;
     const results = await axios.get(url, {
@@ -54,6 +69,7 @@ const VideoPage = () => {
   };
   useEffect(() => {
     fetchData();
+    fetchCourseData();
   }, []);
 
   function togglePlay() {
@@ -243,7 +259,7 @@ const VideoPage = () => {
       ) : (
         <>
           <section
-            className="video-page-section"
+            className="video-page-section bg-black text-white"
             onContextMenu={handleContext}
             onKeyDown={handleKeyDown}
           >

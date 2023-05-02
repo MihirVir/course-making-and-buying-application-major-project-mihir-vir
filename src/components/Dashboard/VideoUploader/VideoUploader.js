@@ -16,7 +16,7 @@ const VideoUploader = () => {
   const navigate = useNavigate();
   const fetchCourseRequest = async () => {
     setIsLoading(true);
-    const url = `http://localhost:8000/test/${id}`;
+    const url = `${URL}test/${id}`;
     const response = await axios.get(url, {
       headers: {
         Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
@@ -90,7 +90,7 @@ const VideoUploader = () => {
                     <img
                       loading="lazy"
                       className="video-dashboard-course-template-img"
-                      src={`http://localhost:8000/templates/${course?.data?.template}`}
+                      src={`${URL}templates/${course?.data?.template}`}
                       alt=""
                     />
                     <p className="pr-2 text-white">
