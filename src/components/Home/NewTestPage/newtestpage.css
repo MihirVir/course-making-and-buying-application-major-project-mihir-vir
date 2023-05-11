@@ -1,71 +1,80 @@
 .home-enter-img-svg {
-    height: 92vh;
-    width: 100%;
-    padding: 0;
-    /* background-color: aquamarine; */
-   
+  height: 92vh;
+  width: 100%;
+  padding: 0;
+  /* background-color: aquamarine; */
 }
 .home-enter-container {
-    height: 100%;
-    width: 100%;
-    align-items: center;
+  height: 100%;
+  width: 100%;
+  align-items: center;
 
-    display: flex;
-    justify-content: space-evenly;
+  display: flex;
+  justify-content: space-evenly;
 }
 .new-test-page-img {
-    width: 30%;
-    height: 40%;
-    object-fit: contain;
-    animation-name: suii;
-    animation-duration: 3s;
-    animation-iteration-count: infinite;
+  width: 30%;
+  height: 40%;
+  object-fit: contain;
+  animation-name: suii;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
 }
 .home-enter-motivation {
-    width: 100%;
-    font-size: 3rem;
+  width: 100%;
+  font-size: 3rem;
 }
 .home-enter-details {
-    width: 38%;
-    padding: 20px;
+  width: 38%;
+  padding: 20px;
 }
 .home-enter-para {
-    width: 60%;
-    font-weight: 300;
-    text-align: center;
-    font-size: 1.2rem;
+  width: 60%;
+  font-weight: 300;
+  text-align: center;
+  font-size: 1.2rem;
 }
 @keyframes suii {
-    0% {
-        transform: translateY(5px);
-    }
-    50% {
-        transform: translateY(-5px);
-    }
-    100% {
-        transform: translateY(5px);
-    }
+  0% {
+    transform: translateY(5px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(5px);
+  }
 }
 
-@media screen and (max-width: 900px){
-    .home-enter-container {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        gap: 1em;
-    }
-    .home-enter-motivation {
-        font-size: 1.2rem;    
-    }
-    .home-enter-para {
-        font-size: .9rem;
-    }
-    .home-enter-details {
-        width: 60%;
-    }
-    .new-test-page-img {
-        height: 400px;
-        width: 80%;
-        object-fit: contain;
-    }
+@media screen and (max-width: 900px) {
+  .home-enter-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    gap: 1em;
+  }
+  .home-enter-details {
+    width: 100%;
+
+    padding: 0;
+  }
+  .home-enter-motivation {
+    font-size: 1.6rem;
+    color: white;
+    text-shadow: 2px 2px 2px #000;
+    font-weight: 900;
+  }
+  .home-enter-para {
+    font-size: 1rem;
+    color: white;
+  }
+  .home-enter-details {
+    width: 60%;
+  }
+  .new-test-page-img {
+    height: 400px;
+    width: 60%;
+    object-fit: contain;
+  }
 }

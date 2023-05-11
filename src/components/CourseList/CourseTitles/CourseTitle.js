@@ -41,7 +41,7 @@ const CourseTitle = ({ courseDetails, isLoading }) => {
                 </span>
               </div>
             </div>
-            <Paper
+            <div
               className="specific-course-paper"
               sx={{ height: "62vh", width: "28vw" }}
               elevation={4}
@@ -58,15 +58,12 @@ const CourseTitle = ({ courseDetails, isLoading }) => {
                   </li>
                   <li className="policy">10-Day Money-Back Guarantee</li>
                   <li className="policy">Full Lifetime Access</li>
-                  <li className="cart-btn-container">
-                    <button className="cart-btn">Add to cart</button>
-                  </li>
                   <li className="buy-btn-container">
                     <button className="buy-btn">Buy this course</button>
                   </li>
                 </ul>
               </div>
-            </Paper>
+            </div>
           </>
         )}
       </section>

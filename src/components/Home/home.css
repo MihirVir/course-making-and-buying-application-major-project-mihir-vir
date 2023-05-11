@@ -1,7 +1,7 @@
 .home-section {
-    /* background-color: black; */
-    min-height: 90.2vh;
-    width: 100%;
-
-    z-index: 10
+  /* background-color: black; */
+  min-height: 90.2vh;
+  width: 100%;
+  overflow-x: hidden;
+  z-index: 10;
 }

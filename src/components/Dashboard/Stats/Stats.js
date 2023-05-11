@@ -27,7 +27,7 @@ const Stats = () => {
     ],
   };
   const options = {};
-  // fetch graph data
+  // fetch line graph data
   const fetchGraphsData = async () => {
     try {
       const url = `${URL}admin/`;

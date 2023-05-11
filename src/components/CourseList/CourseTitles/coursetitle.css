@@ -1,129 +1,138 @@
 .specific-course-details {
-    height: 40vh;
-    background-color: rgb(10,25,41);
-    display: flex;
-    padding-left: 20px;
-    color: white;
-    padding-right: 20px;
-    justify-content: space-between;
-    padding-top: 20px;
+  height: 40vh;
+  background-color: rgb(10, 25, 41);
+  display: flex;
+  padding-left: 20px;
+  color: white;
+  padding-right: 20px;
+  justify-content: space-between;
+  padding-top: 20px;
 }
 .fixed-pos-li {
-    list-style: none;
+  list-style: none;
 }
 .specific-course-img {
-    height: 100%;
-    width: 100%;
+  height: 100%;
+  width: 100%;
 }
 .specific-course-details-second-col {
-    width: 40%;
+  width: 40%;
 }
 .specific-course-items {
-    padding: 10px;
-    width: 20%;
-    object-fit: cover;
-    height: 100%;
-    display: flex;
-    justify-content: center;
+  padding: 10px;
+  width: 20%;
+  object-fit: cover;
+  height: 100%;
+  display: flex;
+  justify-content: center;
 }
 .specific-course-img {
-    height: 60%;
-    width: 100%;
-    object-fit: cover;
+  height: 60%;
+  width: 100%;
+  object-fit: cover;
 }
-.specific-course-paper{
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    right: 1%;
-    position: fixed;
-    justify-content: flex-start;
+.specific-course-paper {
+  padding: 0.5rem;
+  height: 30vh;
+  width: 30vw;
+  background-color: rgb(13 148 136);
+  display: flex;
+  flex-direction: column;
+  right: 1%;
+  color: black;
+  position: fixed;
+  justify-content: flex-start;
 }
 .short-desc-course {
-    font-weight: 300;
-    margin-top: 10px;
-    width: 60%;
+  font-weight: 300;
+  margin-top: 10px;
+  width: 60%;
 }
 .course-paper-top-change {
-    top: 1%;
+  top: 1%;
 }
 .course-name-title {
-    font-size: 2rem;
-    font-weight: 300;
+  font-size: 2rem;
+  font-weight: 300;
 }
 .course-language {
-    margin-top: 10px;
-    font-weight: 800;
+  margin-top: 10px;
+  font-weight: 800;
 }
 .rating {
-    width: 30%;
-    display: flex;
-    align-items: center;
-    margin-top: 10px;
+  width: 30%;
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
 }
 .rating-text {
-    color: rgb(250,175,0);
-    margin-right: 5px;
+  color: rgb(250, 175, 0);
+  margin-right: 5px;
 }
 .rated-by {
-    margin-left: 10px;
-    color: brown;
+  margin-left: 10px;
+  color: brown;
 }
 .created-by {
-    margin-right: 10px;
-    text-transform: lowercase;
-    font-size: 0.9rem;
+  margin-right: 10px;
+  text-transform: lowercase;
+  font-size: 0.9rem;
 }
 .developed-by {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 .developers-username {
-    font-weight: 800;
-    text-decoration: underline;
-    color: rgb(164,53,240);
+  font-weight: 800;
+  text-decoration: underline;
+  color: rgb(164, 53, 240);
 }
 .specific-course-item-details {
-    height: 100%;
+  height: 100%;
 }
 .specific-course-item-details > ul {
-    height: 100%;
-    width: 100%;;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: space-between;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
 }
 .policy {
-    font-size: .8rem;
+  font-size: 0.8rem;
 }
 .cart-btn-container {
-    width: 100%;
-    height: 80%;
-
+  width: 100%;
+  height: 80%;
 }
 .cart-btn {
-    width: 100%;
-    height: 80%;
-    border: 1px solid rgb(164,53,240);
-    background-color: transparent;
-    font-weight: 800;
-    font-size: 1.1rem;
+  width: 100%;
+  height: 80%;
+  border: 1px solid rgb(164, 53, 240);
+  background-color: transparent;
+  font-weight: 800;
+  font-size: 1.1rem;
 }
 .cart-btn:hover {
-    background-color: #eeeeee;
+  background-color: #eeeeee;
 }
 .buy-btn-container {
-    width: 100%;
-    height: 80%;
+  width: 100%;
+  height: 80%;
 }
 .buy-btn {
-    width: 100%;
-    height: 80%;
-    background-color: rgb(164,53,240);
-    border: none;
-    font-weight: 800;
-    font-size: 1.1rem;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(164, 53, 240);
+  border: none;
+  font-weight: 800;
+  color: white;
+  font-size: 1.1rem;
 }
 .buy-btn:hover {
-    background-color: rgb(184, 87, 248);
+  background-color: rgb(184, 87, 248);
+}
+@media screen and (max-width: 900px) {
+  .specific-course-paper {
+    width: 60%;
+  }
 }

@@ -57,6 +57,7 @@ textarea::placeholder {
   font-weight: 500;
   text-transform: uppercase;
   font-size: 1rem;
+  color: black;
   background-color: rgb(248, 249, 251);
 }
 .contact-section-submit-btn:hover {
@@ -70,4 +71,29 @@ textarea::placeholder {
   width: 300px;
   aspect-ratio: 16/9;
   right: 10%;
+}
+@media screen and (max-width: 900px) {
+  .section-duck {
+    display: none;
+  }
+  .contact-us-input-wrapper {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+  .contact-page-section-container > h2 {
+    font-size: 1.7rem;
+    text-align: center;
+    font-weight: 900;
+  }
+  .contact-section-input {
+    width: 85%;
+  }
+  .contact-section-submit-btn {
+    width: 85%;
+  }
+  .contact-section-message {
+    width: 85%;
+  }
 }

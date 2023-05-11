@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Slider from "./Slider/Slider";
+// import Slider from "./Slider/Slider";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./home.css";

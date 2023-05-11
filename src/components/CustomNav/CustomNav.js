@@ -42,7 +42,16 @@ const CustomNav = () => {
     }
     fetchData();
   }, [search]);
-
+  const handleDeleteAccount = () => {
+    const url = `${URL}auth/`;
+    const res = axios.delete(url, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
+      },
+    });
+    console.log(res.data);
+    navigate("/login");
+  };
   const handleSearch = (e) => {
     e.preventDefault();
     navigate("/search");
@@ -68,7 +77,7 @@ const CustomNav = () => {
                   style={{ color: "black" }}
                   placeholder="type to search"
                 />
-                <button>Submit</button>
+                <button class="btn-is-real">Submit</button>
               </form>
               {isResultOpen && (
                 <div className="search-results">
@@ -136,10 +145,7 @@ const CustomNav = () => {
                   <MoreVertIcon onClick={handleOptionsClick} />
                   {isOptionsOpen && (
                     <div className="user-options-result">
-                      <Paper
-                        className="paper-styling-options"
-                        sx={{ height: "25vh", width: "14vw" }}
-                      >
+                      <div className="paper-styling-options">
                         <div className="option-items-container">
                           <div className="avatar-and-username">
                             <Avatar
@@ -147,15 +153,15 @@ const CustomNav = () => {
                               src="https://i.scdn.co/image/ab67616d0000b27324873164c69c38a8fe2d9730"
                             />
                             <span className="nav-username">Mihir</span>
-                            <ShoppingCartIcon />
                           </div>
                           <p className="options">
                             <Link to="/dashboard/users">Dashboard</Link>
                           </p>
-                          <p className="options">Update Account</p>
-                          <p className="options">Delete Account</p>
+                          <p onClick={handleDeleteAccount} className="options">
+                            Delete Account
+                          </p>
                         </div>
-                      </Paper>
+                      </div>
                     </div>
                   )}
                 </li>

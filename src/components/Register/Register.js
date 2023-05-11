@@ -1,5 +1,3 @@
-import { Button, Paper, TextField, Divider, Typography } from "@mui/material";
-import { Stack } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 import React, { useReducer, useState } from "react";
 import axios from "axios";
@@ -39,72 +37,49 @@ const Register = () => {
   // console.log(state.username, state.email, state.password);
   return (
     <>
-      <section className="register-page">
-        <div className="register-page-container">
-          <Paper className="register-page-container-paper" elevation={2}>
-            <form onSubmit={handleSubmit} className="form">
-              <Stack
-                className="register-page-stack"
-                spacing={1}
-                divider={<Divider orientation="vertical" flexItem />}
-              >
-                <div>
-                  <Typography variant="h4">
-                    {errorMessage === "user already exists"
-                      ? "User Already Exist"
-                      : "Register"}
-                  </Typography>
-                </div>
-                <div>
-                  <TextField
-                    onChange={handleChange}
-                    name="email"
-                    className="register-page-text-field"
-                    label="Email"
-                    variant="outlined"
-                  />
-                </div>
-                <div>
-                  <TextField
-                    onChange={handleChange}
-                    name="username"
-                    className="register-page-text-field"
-                    label="username"
-                    variant="outlined"
-                  />
-                </div>
-                <div>
-                  <TextField
-                    onChange={handleChange}
-                    name="password"
-                    className="register-page-text-field"
-                    label="password"
-                    variant="outlined"
-                    type="password"
-                  />
-                </div>
-                <div>
-                  <Button
-                    type="submit"
-                    name="submit-btn"
-                    size="large"
-                    className="register-page-text-field"
-                    variant="outlined"
-                  >
-                    Register
-                  </Button>
-                </div>
-                <div>
-                  <p
-                    className="register-page-para"
-                    onClick={() => navigate("/")}
-                  >
-                    already have an account? Login
-                  </p>
-                </div>
-              </Stack>
-            </form>
-          </Paper>
+      <section className="login-section">
+        <div className="login-container bg-neutral-900">
+          <form onSubmit={handleSubmit} className="login-form-style">
+            <h2 className="form-heading text-white">Login</h2>
+            <input
+              type="text"
+              className="input-field-login"
+              onChange={handleChange}
+              name="email"
+              placeholder="email"
+            />
+            <input
+              type="text"
+              name="username"
+              className="input-field-login"
+              placeholder="username"
+              onChange={handleChange}
+            />
+            <input
+              className="input-field-login"
+              type="password"
+              onChange={handleChange}
+              name="password"
+              placeholder="password"
+            />
+
+            <button type="submit" className="submit-btn ">
+              Register
+            </button>
+
+            <p
+              onClick={() => {
+                navigate("/register");
+              }}
+              className="text-white"
+              style={{
+                cursor: "pointer",
+              }}
+            >
+              Don't have an account? click to register (working on CSS Tho won't
+              be styled) the logic works
+            </p>
+          </form>
         </div>
       </section>
     </>
