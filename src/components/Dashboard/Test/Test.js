@@ -43,7 +43,7 @@ const Test = () => {
     data.append("security", isPrivate);
     data.append("tags", state.tags);
     data.append("title", state.title);
-
+    data.append("coupon", state.coupon);
     const res = await axios.post(`${URL}test/`, data, {
       headers: {
         Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
@@ -150,6 +150,14 @@ const Test = () => {
                   className="text-white mb-2 dashboard-input-course-upload bg-gray-900"
                   type="text"
                   placeholder="Enter video titles like Introduction to Java,Starting Classes,Using Inheritance..."
+                />
+                <label className="text-white">Coupon Code</label>
+                <input
+                  type="text"
+                  name="coupon"
+                  onChange={handleChange}
+                  placeholder="enter your coupon code for purchasing this course"
+                  className="text-white mb-2 dashboard-input-course-upload bg-gray-900"
                 />
                 <button
                   className="bg-sky-300 mt-3 h-10 hover:bg-sky-500 rounded-sm"

@@ -3,7 +3,6 @@ import { Paper } from "@mui/material";
 import { Link } from "react-router-dom";
 import "./coursedetail.css";
 const CourseDetail = ({ courseDetails, purchased, isLoading }) => {
-  console.log("hello ", courseDetails.courseVideos);
   return (
     <>
       <section className="topic-container-section">

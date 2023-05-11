@@ -33,7 +33,7 @@
 }
 .specific-course-paper {
   padding: 0.5rem;
-  height: 30vh;
+  height: 50vh;
   width: 30vw;
   background-color: rgb(13 148 136);
   display: flex;
@@ -128,11 +128,52 @@
   color: white;
   font-size: 1.1rem;
 }
+.coupon-handler {
+  position: absolute;
+  background-color: rgb(30 41 59);
+  width: 30vw;
+  height: 40vh;
+  border-radius: 10px;
+  top: 20%;
+  box-shadow: 4px 4px 6px 4px rgba(0, 0, 0, 0.5);
+  right: 40%;
+  padding: 1rem;
+}
+.submit-purchase-btn {
+  padding: 1rem;
+  background-color: black;
+  margin-top: 1rem;
+  transition: all 120ms ease;
+  width: 100%;
+}
+.text-field-for-coupon {
+  padding: 0.5rem;
+  width: 100%;
+  margin-top: 1rem;
+}
+.title-purchase {
+  color: rgb(253 186 116);
+  font-weight: 700;
+  font-size: 1.45rem;
+}
+.closing-tag {
+  right: 10%;
+  top: 8%;
+  cursor: pointer;
+}
 .buy-btn:hover {
   background-color: rgb(184, 87, 248);
 }
 @media screen and (max-width: 900px) {
   .specific-course-paper {
     width: 60%;
+    height: 40vh;
+  }
+  .specific-course-details {
+    height: 50vh;
+  }
+  .short-desc-course {
+    width: 100%;
+    text-align: justify;
   }
 }

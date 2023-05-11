@@ -160,6 +160,9 @@ const CustomNav = () => {
                           <p onClick={handleDeleteAccount} className="options">
                             Delete Account
                           </p>
+                          <Link to="/classroom" className="options">
+                            Classroom
+                          </Link>
                         </div>
                       </div>
                     </div>

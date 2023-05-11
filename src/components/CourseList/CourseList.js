@@ -4,13 +4,14 @@ import CourseTitle from "./CourseTitles/CourseTitle";
 import "./courselist.css";
 import CourseDetail from "./CourseDetails/CourseDetail";
 import CourseVideo from "./CourseVideo/CourseVideo";
+import { useNavigate } from "react-router-dom";
 import { URL } from "../../URL";
 import axios from "axios";
 const CourseList = () => {
   const [loading, setLoading] = useState(true);
   const [courseDetails, setCourseDetails] = useState(null);
   const [isPurchased, setIsPurchased] = useState(false);
-
+  const navigate = useNavigate();
   const url = document.URL;
   const gettingCourseId = url.split("/")[4];
   const fetchData = async () => {
@@ -21,20 +22,21 @@ const CourseList = () => {
         Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
       },
     });
-
+    if (result.data.purchased === true) {
+      document.location.href = "http://localhost:3000/classroom";
+    }
     setCourseDetails(result.data);
     setLoading(false);
-    if (result.data.isPurchased != null) {
+    if (result.data.purchased === true) {
       setIsPurchased(true);
     }
   };
   console.log(courseDetails);
-  console.log("courseDetails", courseDetails);
-
+  console.log(isPurchased);
   useEffect(() => {
     fetchData();
   }, []);
-  console.log(courseDetails);
+  console.log("mihir: ", courseDetails);
   return (
     <>
       {courseDetails ? (
@@ -43,14 +45,10 @@ const CourseList = () => {
             <CustomNav />
             <CourseTitle
               courseDetails={courseDetails}
-              purchased={isPurchased}
+              courseId={gettingCourseId}
               isLoading={loading}
             />
-            <CourseDetail
-              courseDetails={courseDetails}
-              purchased={isPurchased}
-              isLoading={loading}
-            />
+            <CourseDetail courseDetails={courseDetails} isLoading={loading} />
             <CourseVideo />
           </section>
         </>

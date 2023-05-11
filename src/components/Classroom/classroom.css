@@ -1,0 +1,52 @@
+.classroom-section {
+  min-height: 100vh;
+  width: 100vw;
+  padding: 1em;
+}
+.classroom-section-card-wrapper {
+  display: grid;
+  gap: 1em;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(auto, 100px);
+}
+.classroom-section-card {
+  background-color: rgb(12 10 9);
+  height: 100%;
+  border-radius: 5px;
+  padding: 1em;
+  width: 100%;
+}
+.img-purchaser-handler {
+  width: 50%;
+}
+.flex-wala-thingy {
+  color: white;
+  display: flex;
+}
+.inner-div {
+  display: flex;
+  flex-direction: column;
+}
+.styling-the-tags {
+  background-color: aliceblue;
+  color: black;
+  padding: 0.2rem;
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+}
+.video-count {
+  margin-top: 1rem;
+  font-size: 0.84rem;
+}
+.course-price {
+  margin-top: 0.5rem;
+  background-color: rgb(145, 145, 145);
+  width: max-content;
+  padding: 0.5rem;
+  border-radius: 10px;
+}
+@media screen and (max-width: 990px) {
+  .classroom-section-card-wrapper {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}

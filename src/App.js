@@ -14,6 +14,7 @@ import Search from "./components/Search/Search";
 import VideoUploader from "./components/Dashboard/VideoUploader/VideoUploader";
 import EditDashboard from "./components/Dashboard/EditDashboard/EditDashboard";
 import Payment from "./components/Payment/Payment";
+import Classroom from "./components/Classroom/Classroom";
 function App() {
   return (
     <>
@@ -45,6 +46,7 @@ function App() {
               element={<EditDashboard />}
             ></Route>
             <Route exact path="/payment/:id" element={<Payment />}></Route>
+            <Route exact path="/classroom" element={<Classroom />}></Route>
           </Routes>
         </Router>
       </Provider>

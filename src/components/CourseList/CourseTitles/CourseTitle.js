@@ -3,9 +3,35 @@ import { Paper, Rating } from "@mui/material";
 import "./coursetitle.css";
 import { URL } from "../../../URL";
 import axios from "axios";
-const CourseTitle = ({ courseDetails, isLoading }) => {
-  const [restObject, setRestObject] = useState({});
-  console.log("these nuts", courseDetails);
+const CourseTitle = ({ courseDetails, isLoading, courseId }) => {
+  const [coupon, setCoupon] = useState("");
+  const [couponMode, setCouponMode] = useState(false);
+  function openCouponCodeEnter() {
+    setCouponMode((prev) => !prev);
+  }
+  const handleCoupon = (e) => {
+    setCoupon(e.target.value);
+  };
+  const handlePurchase = async (e) => {
+    e.preventDefault();
+    try {
+      const url = `${URL}newer/${courseId}`;
+      const res = await axios.post(
+        url,
+        { coupon: coupon },
+        {
+          headers: {
+            Authorization: `Bearer ${JSON.parse(
+              localStorage.getItem("token")
+            )}`,
+          },
+        }
+      );
+      setCouponMode(false);
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <>
       <section className="specific-course-details">
@@ -59,10 +85,39 @@ const CourseTitle = ({ courseDetails, isLoading }) => {
                   <li className="policy">10-Day Money-Back Guarantee</li>
                   <li className="policy">Full Lifetime Access</li>
                   <li className="buy-btn-container">
-                    <button className="buy-btn">Buy this course</button>
+                    <button onClick={openCouponCodeEnter} className="buy-btn">
+                      Buy this course
+                    </button>
                   </li>
                 </ul>
               </div>
+            </div>
+          </>
+        )}
+        {couponMode && (
+          <>
+            <div className="coupon-handler">
+              <form className="coupon-form-handler" onSubmit={handlePurchase}>
+                <h1 className="title-purchase">Purchase Code</h1>
+                <span
+                  onClick={() => setCouponMode(false)}
+                  className="closing-tag"
+                >
+                  Close
+                </span>
+                <input
+                  onChange={handleCoupon}
+                  className="text-field-for-coupon bg-slate-900 rounded"
+                  type="text"
+                  placeholder="enter coupon code to purchase the course"
+                />
+                <button
+                  className="submit-purchase-btn hover:bg-neutral-900"
+                  type="submit"
+                >
+                  Enter to purchase
+                </button>
+              </form>
             </div>
           </>
         )}
