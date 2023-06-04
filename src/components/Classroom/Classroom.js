@@ -9,7 +9,7 @@ const Classroom = () => {
   const nav = useNavigate();
   const fetchCourseList = async () => {
     try {
-      const url = `http://localhost:8000/newer`;
+      const url = `${URL}newer`;
       // getting data from the backend
       const response = await axios.get(url, {
         headers: {
