@@ -23,7 +23,7 @@ const CourseList = () => {
       },
     });
     if (result.data.purchased === true) {
-      document.location.href = "http://localhost:3000/classroom";
+      navigate("/classroom");
     }
     setCourseDetails(result.data);
     setLoading(false);
