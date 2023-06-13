@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { URL } from "../../URL";
 import { useNavigate } from "react-router-dom";
+import HomeIcon from "@mui/icons-material/Home";
+
 import "./classroom.css";
 
 const Classroom = () => {
@@ -31,7 +33,17 @@ const Classroom = () => {
   return (
     <>
       <section className="classroom-section bg-slate-900">
-        <div className="classroom-section-card-wrapper">
+        <HomeIcon
+          style={{
+            color: "#fefefe",
+            marginBottom: ".5rem",
+            cursor: "pointer",
+          }}
+          onClick={() => {
+            nav("/");
+          }}
+        />
+        <div className="classroom-section-card-wrapper cursor-pointer">
           {courseList.map((item, idx) => {
             return (
               <>
